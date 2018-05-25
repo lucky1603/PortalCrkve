@@ -29,12 +29,23 @@ public class LinkView extends StackPane {
     public LinkView(Link link)
     {
         this.link = link;
+
         caption = new Text();
         caption.setText(link.getCaption());        
         caption.getStyleClass().add("caption");
+        
+        boundingRect = new Rectangle();
+        boundingRect.getStyleClass().add("rect");
+        
+        boundingRect.heightProperty().bind(this.heightProperty());  
+        this.widthProperty().addListener((o, oldVal, newVal) -> {
+            boundingRect.setWidth(this.widthProperty().get() - this.getInsets().getLeft() - this.getInsets().getRight());
+        });
+        
+        
 
         
-        this.getChildren().add(caption);
+        this.getChildren().addAll(boundingRect, caption);
         this.setAlignment(Pos.CENTER);                
         this.getStyleClass().add("frame");
     }

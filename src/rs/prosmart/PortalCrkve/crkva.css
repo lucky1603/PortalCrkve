@@ -1,6 +1,6 @@
 .vbox {
     -fx-background-image: url(Slike/crkva-background-middle.png); 
-    -fx-padding: 10 35 0 35;
+    /* -fx-padding: 10 35 0 35; */ 
 }
 
 .caption {
@@ -11,40 +11,19 @@
     
 }
 
-.title-caption {
-    -fx-fill: #cddce9;
-    -fx-font: 12 Arial;
-    -fx-font-weight: 600;
-    -fx-padding: 15 15 15 15;
-}
-
-.rect {
-   -fx-arc-height: 20px;
-   -fx-arc-width: 20px;
-   -fx-fill: #ffffee;
-   -fx-margin: 30 0 30 0;
-   
-}
-
 .frame {
-
-    -fx-padding: 5 5 0 5;
     -fx-min-width: 280px;
     -fx-min-height: 75px;
-    -fx-background-color: #cddce9;
+/*    -fx-background-color: #cddce9;   */
+    -fx-background-color: transparent;   
+    -fx-insets: 25 25 25 25;
+    -fx-padding: 0 30 0 30;
 }
 
-.title-frame {
-    -fx-border-color: #175184;
-    -fx-border-width: 5;   
-    -fx-padding: 5 5 5 5;
-    -fx-min-width: 280px;
-    -fx-min-height: 75px;
-    -fx-background-color: darkblue;
-}
 
 .flow {
-    -fx-background-color: #175184;
+    /* -fx-background-color: #175184; */
+    -fx-background-color: transparent;
     -fx-min-height: 500px;
     -fx-padding: 5 5 5 5;
 }
@@ -52,5 +31,22 @@
 .title {
     -fx-font: 25 Arial;
     -fx-text-fill: #cddce9;    
+}
+
+.selected {
+    -fx-background-image: url(Slike/crkva-selected-background-middle.png);
+    -fx-overflow: visible;
+}
+
+.selected .caption {
+    -fx-fill: white;
+}
+
+.selected .rect {
+    -fx-fill: transparent;
+}
+
+.rect {
+    -fx-fill: #cddce9;
 }
 

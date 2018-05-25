@@ -13,10 +13,9 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -24,16 +23,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.scene.web.PopupFeatures;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
@@ -41,6 +32,8 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import org.w3c.dom.Document;
 import rs.prosmart.JSHandlers.JSHandlers;
+import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
 
 /**
  *
@@ -50,6 +43,8 @@ public class PortalCrkve extends Application {
     private WebView webView;
     private ListView<LinkView> listView;
     private VBox vBox;
+    private ObservableList<LinkView> linkViews = FXCollections.observableArrayList();
+    private ObjectProperty<LinkView> selectedlinkViewProperty = new SimpleObjectProperty<LinkView>();
     
     @Override
     public void start(Stage primaryStage) {
@@ -96,6 +91,11 @@ public class PortalCrkve extends Application {
             return popupView.getEngine();
         };
         
+        this.selectedlinkViewProperty.addListener((property, oldVal, newVal) -> {
+            ((LinkView) oldVal).getStyleClass().remove("selected");
+            ((LinkView) newVal).getStyleClass().add("selected");
+        });
+        
         enableJSHandlers();
         //webView.getEngine().setCreatePopupHandler(popupHandler);
         
@@ -107,6 +107,16 @@ public class PortalCrkve extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+    }
+    
+    public LinkView getSelectedLinkView()
+    {
+        return selectedlinkViewProperty.get();
+    }
+    
+    public void setSelectedLinkView(LinkView linkView)
+    {
+        this.selectedlinkViewProperty.set(linkView);
     }
     
     private void initMenu()
@@ -128,9 +138,9 @@ public class PortalCrkve extends Application {
             linkView0.getStyleClass().add("submenu");
             //listView.getItems().add(linkView0);
             linkView0.setOnMouseClicked(e -> {
-                URL url = linkView0.getLink().getURL();
-                webView.getEngine().load(url.toExternalForm());
+                this.selectLinkView(linkView0);
             });
+            linkViews.add(linkView0);
             
             Link link1 = new Link();
             link1.setCaption("Yahoo");
@@ -139,9 +149,9 @@ public class PortalCrkve extends Application {
             linkView1.getStyleClass().add("submenu");
             //listView.getItems().add(linkView1);
             linkView1.setOnMouseClicked(e -> {
-                URL url = linkView1.getLink().getURL();
-                webView.getEngine().load(url.toExternalForm());
+                this.selectLinkView(linkView1);
             });
+            linkViews.add(linkView1);
             
             
             Link link2 = new Link();
@@ -151,9 +161,9 @@ public class PortalCrkve extends Application {
             linkview2.getStyleClass().add("submenu");
             //listView.getItems().add(linkview2);
             linkview2.setOnMouseClicked(e -> {
-                URL url = linkview2.getLink().getURL();
-                webView.getEngine().load(url.toExternalForm());
+                this.selectLinkView(linkview2);
             });
+            linkViews.add(linkview2);
             
             Link link3 = new Link();
             link3.setCaption("Glavna");
@@ -162,9 +172,9 @@ public class PortalCrkve extends Application {
             linkview3.getStyleClass().add("submenu");
             //listView.getItems().add(linkview3);
             linkview3.setOnMouseClicked(e -> {
-                URL url = linkview3.getLink().getURL();
-                webView.getEngine().load(url.toExternalForm());
+                this.selectLinkView(linkview3);
             });
+            linkViews.add(linkview3);
             
             Link link4 = new Link();
             link4.setCaption("Vaske");
@@ -173,9 +183,9 @@ public class PortalCrkve extends Application {
             linkview4.getStyleClass().add("submenu");
             //listView.getItems().add(linkview4);
             linkview4.setOnMouseClicked(e -> {
-                URL url = linkview4.getLink().getURL();
-                webView.getEngine().load(url.toExternalForm());
+                this.selectLinkView(linkview4);
             });
+            linkViews.add(linkview4);
             
             Link link5 = new Link();
             link5.setCaption("Moj");
@@ -183,12 +193,14 @@ public class PortalCrkve extends Application {
             LinkView linkview5 = new LinkView(link5);
             linkview5.getStyleClass().add("submenu");
             //listView.getItems().add(linkview5);
-            linkview5.setOnMouseClicked(e -> {
-                URL url = linkview5.getLink().getURL();
-                webView.getEngine().load(url.toExternalForm());
+            linkview5.setOnMouseClicked(e -> {                
+                this.selectLinkView(linkview5);
             });
+            linkViews.add(linkview5);
             
-
+            // Make first as selected
+            this.setSelectedLinkView(linkViews.get(0));
+            
             VBox itemBox = new VBox(5, title, linkView1, linkview2, linkview3, linkview4, linkview5);
             itemBox.getStyleClass().add("flow");
             itemBox.setAlignment(Pos.CENTER);
@@ -203,9 +215,14 @@ public class PortalCrkve extends Application {
         } catch (MalformedURLException ex) {
             Logger.getLogger(PortalCrkve.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
+                        
+    }
+    
+    private void selectLinkView(LinkView linkView)
+    {
+        URL url = linkView.getLink().getURL();
+        webView.getEngine().load(url.toExternalForm());
+        setSelectedLinkView(linkView);
     }
 
     private void enableJSHandlers() {
