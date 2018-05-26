@@ -1,5 +1,5 @@
 .vbox {
-    -fx-background-image: url(Slike/crkva-background-middle.png); 
+    -fx-background-image: url(Slike/empty-background.png); 
     /* -fx-padding: 10 35 0 35; */ 
 }
 
@@ -13,9 +13,10 @@
 
 .frame {
     -fx-min-width: 280px;
-    -fx-min-height: 75px;
+    -fx-min-height: 63px;
 /*    -fx-background-color: #cddce9;   */
-    -fx-background-color: transparent;   
+    -fx-background-image: url(Slike/non-selected-background.png);
+    /* -fx-background-color: transparent;    */
     -fx-insets: 25 25 25 25;
     -fx-padding: 0 30 0 30;
 }
@@ -25,7 +26,7 @@
     /* -fx-background-color: #175184; */
     -fx-background-color: transparent;
     -fx-min-height: 500px;
-    -fx-padding: 5 5 5 5;
+    /* -fx-padding: 5 5 5 5;*/
 }
 
 .title {
@@ -34,7 +35,7 @@
 }
 
 .selected {
-    -fx-background-image: url(Slike/crkva-selected-background-middle.png);
+    -fx-background-image: url(Slike/selected-background2.png);
     -fx-overflow: visible;
 }
 
