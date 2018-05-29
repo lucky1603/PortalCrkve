@@ -6,13 +6,10 @@
 package rs.prosmart.PortalCrkve;
 
 import java.net.MalformedURLException;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -120,8 +117,7 @@ public class VerticalLayout extends SplitPane {
 
     }
             
-    // Properties
-    
+    // Properties    
     /**
      * Gets portal model.
      * @return 
@@ -174,14 +170,7 @@ public class VerticalLayout extends SplitPane {
                 });
                 this.linkViews.add(linkView);
             }            
-            
-//            // Make first as selected
-//            if(linkViews.size() > 0)
-//            {
-//                selectLinkView(linkViews.get(0));                
-//            }            
-            
-
+                        
             itemsBox = new VBox(5);            
             itemsBox.getChildren().add(title);
             for(LinkView linkView : this.linkViews)
