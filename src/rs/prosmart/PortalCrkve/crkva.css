@@ -1,5 +1,6 @@
 .vbox {
     -fx-background-image: url(Slike/empty-background.png); 
+    -fx-min-width: 0px;
     /* -fx-padding: 10 35 0 35; */ 
 }
 
@@ -12,7 +13,7 @@
 }
 
 .frame {
-    -fx-min-width: 280px;
+    -fx-pref-width: 280px;
     -fx-min-height: 63px;
 /*    -fx-background-color: #cddce9;   */
     -fx-background-image: url(Slike/non-selected-background.png);
