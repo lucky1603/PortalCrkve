@@ -1,0 +1,35 @@
+<html>
+    
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+<title>oltar</title>  
+<script>
+    function sendClick(location, left, top, right, bottom)
+    {
+        var data = {
+            msg: location,
+            left: left,
+            top: top,
+            right: right,
+            bottom: bottom
+        };
+        
+        window.alert(JSON.stringify(data));
+    }
+</script>
+    
+</head>
+    
+<body>
+        
+<image alt="background" src="oltar.png" usemap="#map"></image>
+        
+<map name="map">
+<area alt="Sv. Djordje" coords="1384,551,1643,735" href="oltar.html" shape="rect" onclick="sendClick('file:/D:/Prosmart/Crkva/html/dj2.htm', 1384, 551, 1643, 735)">
+<area alt="Bogorodica" coords="363,546,576,721" href="oltar.html" shape="rect" onclick="sendClick('file:/D:/Prosmart/Crkva/html/b1.htm',363,546,576,721)">
+</map>
+    
+</body>
+
+</html>
