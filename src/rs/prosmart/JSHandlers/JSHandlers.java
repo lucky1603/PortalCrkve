@@ -3,10 +3,13 @@
  */
 package rs.prosmart.JSHandlers;
 
+import java.net.CookieHandler;
+import java.net.CookieManager;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.PauseTransition;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -20,7 +23,12 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebEvent;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Callback;
+import javafx.util.Duration;
+import jdk.nashorn.internal.parser.JSONParser;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Class that handles JS requests in java code.
@@ -33,32 +41,88 @@ public class JSHandlers {
      */
     public static void alertHandler(WebEvent<String> e) {
        Stage stage = new Stage();
-       stage.setTitle("Alert");
-       
-       Label msg = new Label(e.getData());
-       Button okBtn = new Button("OK");
-       okBtn.setOnAction(e2 -> stage.close());
+       stage.setTitle("test");
        VBox root;  
-       root = new VBox(20, msg, okBtn);
-       root.setAlignment(Pos.CENTER);
+       Object el = e.getSource();
        
-       if(e.getData().equals("195"))
-       {
-           try {
-               WebView myView = new WebView();
-               myView.getEngine().load(new URL("http://www.prosmart.rs").toExternalForm());
-               root = new VBox(myView);
-               Scene scene = new Scene(root);
-               stage.setScene(scene);
-               stage.show();
-           } catch (MalformedURLException ex) {
-               Logger.getLogger(JSHandlers.class.getName()).log(Level.SEVERE, null, ex);
-           }
-       } else {
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.showAndWait();
-       }
+
+        String data = e.getData();
+        JSONObject jsonObject = null;
+        try {
+            jsonObject = new JSONObject(data);               
+        } catch (JSONException ex) {
+            Logger.getLogger(JSHandlers.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if(jsonObject == null && data.contains(":/"))
+        {
+            try {
+                 WebView myView = new WebView();
+                 myView.getEngine().load(new URL(data).toExternalForm());
+                 root = new VBox(myView);
+                 root.setPrefHeight(400);
+                 root.setPrefWidth(600);
+                 Scene scene = new Scene(root);
+                 stage.setScene(scene);
+                 stage.show();
+
+                 // Automatically close dialog after 5 seconds.
+                 PauseTransition delay = new PauseTransition(Duration.seconds(5));
+                 delay.setOnFinished( event -> stage.close() );
+                 delay.play();
+
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(JSHandlers.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            if(jsonObject == null)
+            {
+                Label label = new Label(data);
+                Button btnOk = new Button("OK");
+                btnOk.setOnAction(evt -> {
+                    stage.close();
+                });
+                root = new VBox(20, label, btnOk);
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.showAndWait();
+            } else {
+                try {
+                    String poruka = jsonObject.get("msg").toString();
+                    int left = jsonObject.getInt("left");
+                    int top = jsonObject.getInt("top");
+
+                    double x = (left - 300) <= 0 ? 0 : left - 300;
+                    double y = (top - 200) <= 0 ? 0 : top - 200;
+                    
+                    WebView myView = new WebView();
+                    myView.getEngine().load(new URL(poruka).toExternalForm());
+                    root = new VBox(myView);
+                    root.setPrefHeight(400);
+                    root.setPrefWidth(600);
+                    
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.setX(x);
+                    stage.setY(y);
+                    stage.initStyle(StageStyle.UNDECORATED);
+                    
+                    stage.show();
+                    
+
+                    // Automatically close dialog after 5 seconds.
+                    PauseTransition delay = new PauseTransition(Duration.seconds(3));
+                    delay.setOnFinished( event -> stage.close() );
+                    delay.play();
+                    
+                } catch (JSONException ex) {
+                    Logger.getLogger(JSHandlers.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (MalformedURLException ex) {
+                    Logger.getLogger(JSHandlers.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+         }
               
     }
     
@@ -142,4 +206,6 @@ public class JSHandlers {
         
         return handler;
     }
+    
+    
 }

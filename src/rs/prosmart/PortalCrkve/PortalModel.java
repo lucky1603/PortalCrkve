@@ -44,6 +44,11 @@ public class PortalModel {
         this.getIsTheaterModeProperty().set(isTheaterMode);
     }
     
+    public URL getEntryPoint()
+    {
+        return entryPoint;
+    }
+    
     /**
      * @return the isTheaterModeProperty
      */
@@ -83,8 +88,12 @@ public class PortalModel {
         links.clear();
         
         List<LinkEntry> entries = new ArrayList<>();
-        entries.add(new LinkEntry("Храм Св. Ђорђа", "file:///D:/Prosmart/Crkva/html/glavna.html"));
-        entries.add(new LinkEntry("Црква", "http://www.spc.rs/sr/crkva"));
+        entries.add(new LinkEntry("Храм Св. Ђорђа", "file:///D:/Prosmart/Crkva/html/glavna1.html"));
+        entries.add(new LinkEntry("Историја храма", "http://www.spc.rs/sr/crkva"));
+        entries.add(new LinkEntry("Свештеници храма", "http://www.spc.rs/sr/crkva"));
+        entries.add(new LinkEntry("Светиње храма", "http://www.spc.rs/sr/crkva"));
+        entries.add(new LinkEntry("Делатности храма", "http://www.spc.rs/sr/crkva"));
+        entries.add(new LinkEntry("Историја српске православне цркве Црква", "http://www.spc.rs/sr/crkva"));
         entries.add(new LinkEntry("Патријарх", "http://www.spc.rs/sr/njegova-svetost-patrijarh-srpski-irinej"));
         entries.add(new LinkEntry("Веронаука", "http://www.spc.rs/sr/veronauka"));               
         
@@ -99,6 +108,12 @@ public class PortalModel {
             }
                         
             links.add(link);
+        }
+        
+        try {
+            entryPoint = new URL("file:/D:/Prosmart/Crkva/html/glavna.html");
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(PortalModel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

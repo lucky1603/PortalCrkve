@@ -5,11 +5,18 @@
  */
 package rs.prosmart.PortalCrkve;
 
+import java.net.CookieHandler;
+import java.net.CookieManager;
 import java.net.MalformedURLException;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import rs.prosmart.JSHandlers.JSHandlers;
 
 /**
@@ -18,13 +25,18 @@ import rs.prosmart.JSHandlers.JSHandlers;
  */
 public class PortalCrkve extends Application {
     private WebView webView;
+    private CookieManager manager;
     
     @Override
-    public void start(Stage primaryStage) throws MalformedURLException {       
+    public void start(Stage primaryStage) throws MalformedURLException {     
+//        manager = new CookieManager();
+//        CookieHandler.setDefault(manager);
+//        manager.getCookieStore().removeAll();
+        
         webView = new WebView();
         //webView.getEngine().load(getClass().getResource("Prezentacije/Glavna.html").toExternalForm());
         PortalModel model = new PortalModel();
-        VerticalLayout verticalLayout = new VerticalLayout(webView, model);
+        BorderVerticalLayout verticalLayout = new BorderVerticalLayout(webView, model);
         model.getIsTheaterModeProperty().addListener((o, stari, novi) -> {
             if(model.getIsTheaterMode())
             {
@@ -34,11 +46,41 @@ public class PortalCrkve extends Application {
             }
         });
 
+        webView.widthProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> o, Number stari, Number novi) {                
+                Document doc = webView.getEngine().getDocument();
+                if(doc != null)
+                {
+                    Element el = (Element) doc.getElementById("glavna");
+                    if(el != null)
+                    {
+                        el.setAttribute("width", novi.toString());                
+                    }
+                    
+                }
+                
+            }
+        });
+        
+        webView.heightProperty().addListener((o, stari, novi) -> {
+            Document doc = webView.getEngine().getDocument();
+            if(doc != null) {
+                Element el = (Element) doc.getElementById("glavna");
+                if(el != null)
+                {
+                    el.setAttribute("height", novi.toString());                
+                }                
+            }            
+        });
+        
+        
         Scene scene = new Scene(verticalLayout, 1920, 1080);
         scene.getStylesheets().add(getClass().getResource("crkva.css").toExternalForm());
         
         primaryStage.setTitle("Portal Crkve");
         primaryStage.setScene(scene);
+        //primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.show();
                         
         enableJSHandlers();                

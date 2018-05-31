@@ -1,11 +1,10 @@
 .vbox {
     -fx-background-image: url(Slike/empty-background.png); 
-    -fx-min-width: 0px;
-    /* -fx-padding: 10 35 0 35; */ 
+    -fx-min-width: 300px;
 }
 
 .caption {
-    -fx-fill: #175184;
+    -fx-text-fill: #175184;
     -fx-font: 12 Arial;
     -fx-font-weight: 600;
     -fx-padding: 15 15 15 15;
@@ -13,26 +12,23 @@
 }
 
 .frame {
-    -fx-pref-width: 280px;
+    -fx-pref-width: 350px;
     -fx-min-height: 63px;
-/*    -fx-background-color: #cddce9;   */
     -fx-background-image: url(Slike/non-selected-background.png);
-    /* -fx-background-color: transparent;    */
     -fx-insets: 25 25 25 25;
     -fx-padding: 0 30 0 30;
 }
 
 
 .flow {
-    /* -fx-background-color: #175184; */
     -fx-background-color: transparent;
     -fx-min-height: 500px;
-    /* -fx-padding: 5 5 5 5;*/
 }
 
 .title {
     -fx-font: 25 Arial;
     -fx-text-fill: #cddce9;    
+    -fx-padding: 10 0 10 60;
 }
 
 .selected {
@@ -41,7 +37,7 @@
 }
 
 .selected .caption {
-    -fx-fill: white;
+    -fx-text-fill: white;
 }
 
 .selected .rect {
@@ -50,5 +46,14 @@
 
 .rect {
     -fx-fill: #cddce9;
+}
+
+.commands {
+    -fx-padding: 0 0 50 0;
+}
+
+.interactive {
+    -fx-font-size: 30;
+    -fx-text-fill: white;
 }
 

@@ -5,6 +5,7 @@
  */
 package rs.prosmart.PortalCrkve;
 
+import java.awt.Color;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DateFormat;
@@ -19,6 +20,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebView;
@@ -27,9 +31,10 @@ import javafx.scene.web.WebView;
  *
  * @author Sinisa
  */
-public class VerticalLayout extends SplitPane {
+public class BorderVerticalLayout extends BorderPane {
     private VBox frameBox;
     private VBox itemsBox;
+    private VBox commandBox;
     private final ObservableList<LinkView> linkViews = FXCollections.observableArrayList();
     private SimpleObjectProperty<LinkView> selectedLinkViewProperty = new SimpleObjectProperty<>();
     private WebView connectedView;
@@ -41,7 +46,7 @@ public class VerticalLayout extends SplitPane {
     /**
      * Constructor
      */
-    public VerticalLayout(WebView view, PortalModel model) throws MalformedURLException {
+    public BorderVerticalLayout(WebView view, PortalModel model) throws MalformedURLException {
         super();
         portalModel = model;
         connectedView = view;
@@ -65,20 +70,24 @@ public class VerticalLayout extends SplitPane {
         StackPane sPane = new StackPane();
         sPane.getChildren().add(connectedView);
         
-        Image img = new Image(PortalCrkve.class.getResource("Slike/Actions-media-playback-start-icon.png").toExternalForm());
+        Image img = new Image(PortalCrkve.class.getResource("Slike/3D-Glasses-icon-64.png").toExternalForm());
         startImageView = new ImageView();
         startImageView.setImage(img);
-        startImageView.setScaleX(0.3);
-        startImageView.setScaleY(0.3);
+        //startImageView.setScaleX(0.15);
+        //startImageView.setScaleY(0.15);
         startImageView.setOpacity(0.8);
         
         // Mouse clicked.
         startImageView.setOnMouseClicked(e -> {
+            URL url = this.portalModel.getEntryPoint();
+            this.connectedView.getEngine().load(url.toExternalForm());
             this.portalModel.setIsTheaterMode(true);
         });
         
         // Touch
         startImageView.setOnTouchPressed(e -> {
+            URL url = this.portalModel.getEntryPoint();
+            this.connectedView.getEngine().load(url.toExternalForm());
             this.portalModel.setIsTheaterMode(true);
         });
         
@@ -90,12 +99,18 @@ public class VerticalLayout extends SplitPane {
         exitImageView.setOpacity(0.9);
         
         // Mouse click.
-        exitImageView.setOnMouseClicked(e -> {
+        exitImageView.setOnMouseClicked(e -> {            
+            LinkView linkView = this.linkViews.get(0);
+            //this.setSelectedLinkView(linkView);
+            this.selectLinkView(linkView);
             this.portalModel.setIsTheaterMode(false);
         });
         
         // Touch.
-        exitImageView.setOnTouchPressed(e -> {
+        exitImageView.setOnTouchPressed(e -> {            
+            LinkView linkView = this.linkViews.get(0);
+            //this.setSelectedLinkView(linkView);
+            this.selectLinkView(linkView);
             this.portalModel.setIsTheaterMode(false);
         });
         
@@ -122,8 +137,8 @@ public class VerticalLayout extends SplitPane {
         
         homeImageView.setVisible(false);        
         
-        sPane.getChildren().add(startImageView);
-        sPane.setAlignment(Pos.CENTER);
+        //sPane.getChildren().add(startImageView);
+        //sPane.setAlignment(Pos.CENTER);
         
         sPane.getChildren().add(exitImageView);
         StackPane.setAlignment(exitImageView, Pos.BOTTOM_RIGHT);        
@@ -133,8 +148,23 @@ public class VerticalLayout extends SplitPane {
         StackPane.setAlignment(homeImageView, Pos.TOP_LEFT);
         StackPane.setMargin(homeImageView, new Insets(20, 0, 0, 20));
         
-        this.getItems().addAll(frameBox, sPane);
-        this.setDividerPosition(0, 0.19);
+        Region spacer = new Region();
+        VBox.setVgrow(spacer, Priority.ALWAYS);
+        itemsBox.getChildren().add(spacer);
+        
+        Label lblInteractive = new Label("Interaktivna tura");
+        lblInteractive.getStyleClass().add("interactive");
+
+        commandBox = new VBox(5, lblInteractive, startImageView);
+        commandBox.setAlignment(Pos.CENTER);
+        commandBox.getStyleClass().add("commands");
+        
+        itemsBox.getChildren().add(commandBox);        
+        itemsBox.prefWidth(400);
+        
+        this.setLeft(itemsBox);
+        this.setCenter(sPane);    
+        
 
     }
             
@@ -199,14 +229,7 @@ public class VerticalLayout extends SplitPane {
             itemsBox.getChildren().add(linkView);
         }
 
-        itemsBox.getStyleClass().add("flow");
-        itemsBox.setAlignment(Pos.CENTER);
-
-        frameBox = new VBox(itemsBox);
-        frameBox.getStyleClass().add("vbox");
-        frameBox.prefWidth(250);                        
-            
-        
+        itemsBox.getStyleClass().add("vbox");        
     }
 
     /**
@@ -217,28 +240,17 @@ public class VerticalLayout extends SplitPane {
         URL url = linkView.getLink().getURL();
         connectedView.getEngine().load(url.toExternalForm());
         setSelectedLinkView(linkView);
-        int index = this.linkViews.indexOf(this.getSelectedLinkView());
-        if(this.startImageView == null)
-        {
-            return;
-        }
         
-        if(index == 0)
-        {
-            this.startImageView.setVisible(true);
-        } else {
-            this.startImageView.setVisible(false);
-        }
     }
 
     public void showNavigationMenu(boolean b) {
         if(!b)
         {
-            this.getItems().remove(frameBox);
+            this.setLeft(null);
+            
 
         } else {
-            this.getItems().add(0, frameBox);
-            this.setDividerPosition(0, 0.18);
+            this.setLeft(itemsBox);
         }     
         
         int idx = this.linkViews.indexOf(this.getSelectedLinkView());
