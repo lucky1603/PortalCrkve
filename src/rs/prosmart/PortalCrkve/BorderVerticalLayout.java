@@ -25,6 +25,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.TextAlignment;
 import javafx.scene.web.WebView;
 
 /**
@@ -94,24 +95,22 @@ public class BorderVerticalLayout extends BorderPane {
         Image exitImg = new Image(PortalCrkve.class.getResource("Slike/Log-Out-icon-128.png").toExternalForm());
         exitImageView = new ImageView();
         exitImageView.setImage(exitImg);
-        //exitImageView.setScaleX(0.15);
-        //exitImageView.setScaleY(0.15);
+        exitImageView.setScaleX(0.5);
+        exitImageView.setScaleY(0.5);
         exitImageView.setOpacity(0.9);
         
         // Mouse click.
         exitImageView.setOnMouseClicked(e -> {            
-            LinkView linkView = this.linkViews.get(0);
-            //this.setSelectedLinkView(linkView);
-            this.selectLinkView(linkView);
             this.portalModel.setIsTheaterMode(false);
+            LinkView linkView = this.linkViews.get(0);
+            this.selectLinkView(linkView);            
         });
         
         // Touch.
         exitImageView.setOnTouchPressed(e -> {            
-            LinkView linkView = this.linkViews.get(0);
-            //this.setSelectedLinkView(linkView);
-            this.selectLinkView(linkView);
             this.portalModel.setIsTheaterMode(false);
+            LinkView linkView = this.linkViews.get(0);
+            this.selectLinkView(linkView);            
         });
         
         exitImageView.setVisible(false);
@@ -119,19 +118,18 @@ public class BorderVerticalLayout extends BorderPane {
         Image homeImg = new Image(PortalCrkve.class.getResource("Slike/home-icon-blue.png").toExternalForm());
         homeImageView = new ImageView();
         homeImageView.setImage(homeImg);
-        exitImageView.setScaleX(0.5);
-        exitImageView.setScaleY(0.5);
         homeImageView.setOpacity(0.8);
         
         // Mouse click.
         homeImageView.setOnMouseClicked(e -> {
-            URL url = this.getSelectedLinkView().getLink().getURL();
+            URL url = this.portalModel.getEntryPoint();
             this.connectedView.getEngine().load(url.toExternalForm());
         });
         
         // Touch.
         homeImageView.setOnTouchPressed(e -> {
-            URL url = this.getSelectedLinkView().getLink().getURL();
+            //URL url = this.getSelectedLinkView().getLink().getURL();
+            URL url = this.portalModel.getEntryPoint();
             this.connectedView.getEngine().load(url.toExternalForm());
         });
         
@@ -152,8 +150,10 @@ public class BorderVerticalLayout extends BorderPane {
         VBox.setVgrow(spacer, Priority.ALWAYS);
         itemsBox.getChildren().add(spacer);
         
-        Label lblInteractive = new Label("Interaktivna tura");
+        Label lblInteractive = new Label("Интерактивна екскурзија");
         lblInteractive.getStyleClass().add("interactive");
+        lblInteractive.setWrapText(true);
+        //lblInteractive.setTextAlignment(TextAlignment.CENTER);
 
         commandBox = new VBox(5, lblInteractive, startImageView);
         commandBox.setAlignment(Pos.CENTER);

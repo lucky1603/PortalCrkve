@@ -49,11 +49,15 @@
 }
 
 .commands {
-    -fx-padding: 0 0 50 0;
+    -fx-padding: 0 0 70 0;
 }
 
 .interactive {
-    -fx-font-size: 30;
-    -fx-text-fill: white;
+    -fx-font-size: 20;
+    -fx-text-fill: #cddce9;
+    -fx-max-width: 300;
+    /* -fx-padding: 0 0 0 30; */
+    -fx-text-alignment: center;
+    -fx-alignment: center;
 }
 
