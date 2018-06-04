@@ -94,7 +94,7 @@ public class PortalModel {
         entries.add(new LinkEntry("Светиње храма", "http://www.spc.rs/sr/crkva"));
         entries.add(new LinkEntry("Делатности храма", "http://www.spc.rs/sr/crkva"));
         entries.add(new LinkEntry("Историја Српске Православне Црква", "http://www.spc.rs/sr/crkva"));
-        entries.add(new LinkEntry("Патријарх", "http://www.spc.rs/sr/njegova-svetost-patrijarh-srpski-irinej"));
+        entries.add(new LinkEntry("Патријарх", "file:/D:/Prosmart/Crkva/html/Patrijarh2.htm"));
         entries.add(new LinkEntry("Главни празници", "http://www.spc.rs/sr/veronauka"));               
         entries.add(new LinkEntry("Главни обреди", "http://www.spc.rs/sr/veronauka"));               
         entries.add(new LinkEntry("Молитве", "http://www.spc.rs/sr/veronauka"));               
