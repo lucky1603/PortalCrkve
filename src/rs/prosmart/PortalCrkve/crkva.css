@@ -11,12 +11,19 @@
     
 }
 
-.frame {
+.frame, .separator {
     -fx-pref-width: 350px;
-    -fx-min-height: 63px;
-    -fx-background-image: url(Slike/non-selected-background.png);
+    -fx-min-height: 63px;    
     -fx-insets: 25 25 25 25;
     -fx-padding: 0 30 0 30;
+}
+
+.frame {
+    -fx-background-image: url(Slike/non-selected-background.png);
+}
+
+.separator {
+    -fx-background-image: url(Slike/separator-background.png);
 }
 
 

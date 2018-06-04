@@ -5,17 +5,10 @@
  */
 package rs.prosmart.PortalCrkve;
 
-import javafx.beans.binding.Bindings;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
 
 /**
  *
@@ -34,21 +27,6 @@ public class LinkView extends StackPane {
         caption = new Label();
         caption.setText(link.getCaption());        
         caption.getStyleClass().add("caption");
-        
-        
-        
-        
-//        boundingRect = new Rectangle();
-//        boundingRect.getStyleClass().add("rect");
-        
-//        boundingRect.heightProperty().bind(this.heightProperty());  
-//        this.widthProperty().addListener((o, oldVal, newVal) -> {
-//            boundingRect.setWidth(this.widthProperty().get() - this.getInsets().getLeft() - this.getInsets().getRight());
-//        });
-        
-        
-
-        
         this.getChildren().addAll(/* boundingRect,*/ caption);
         this.setAlignment(Pos.CENTER);                
         this.getStyleClass().add("frame");

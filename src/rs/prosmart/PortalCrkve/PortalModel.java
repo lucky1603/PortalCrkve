@@ -8,13 +8,9 @@ package rs.prosmart.PortalCrkve;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.function.BiConsumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,6 +22,7 @@ import org.w3c.dom.Element;
  */
 public class PortalModel {
     private ObservableList<Link> links = FXCollections.observableArrayList();
+    private ObservableList<Link> localLinks = FXCollections.observableArrayList();
     private URL entryPoint;
     private SimpleBooleanProperty isTheaterModeProperty = new SimpleBooleanProperty();
     
@@ -61,6 +58,11 @@ public class PortalModel {
         return this.links;
     }
     
+    public ObservableList<Link> getLocalLinks()
+    {
+        return this.localLinks;
+    }
+    
     public void loadFromXml(Element element)
     {
         
@@ -87,12 +89,7 @@ public class PortalModel {
     {
         links.clear();
         
-        List<LinkEntry> entries = new ArrayList<>();
-        entries.add(new LinkEntry("Храм Св. Ђорђа", "file:///D:/Prosmart/Crkva/html/glavna1.html"));
-        entries.add(new LinkEntry("Историја храма", "http://www.spc.rs/sr/crkva"));
-        entries.add(new LinkEntry("Свештеници храма", "http://www.spc.rs/sr/crkva"));
-        entries.add(new LinkEntry("Светиње храма", "http://www.spc.rs/sr/crkva"));
-        entries.add(new LinkEntry("Делатности храма", "http://www.spc.rs/sr/crkva"));
+        List<LinkEntry> entries = new ArrayList<>();        
         entries.add(new LinkEntry("Историја Српске Православне Црква", "http://www.spc.rs/sr/crkva"));
         entries.add(new LinkEntry("Патријарх", "file:/D:/Prosmart/Crkva/html/Patrijarh2.htm"));
         entries.add(new LinkEntry("Главни празници", "http://www.spc.rs/sr/veronauka"));               
@@ -111,6 +108,26 @@ public class PortalModel {
             }
                         
             links.add(link);
+        }
+        
+        entries.clear();
+        entries.add(new LinkEntry("Храм Св. Ђорђа", "file:///D:/Prosmart/Crkva/html/glavna1.html"));
+        entries.add(new LinkEntry("Историја храма", "http://www.spc.rs/sr/crkva"));
+        entries.add(new LinkEntry("Свештеници храма", "http://www.spc.rs/sr/crkva"));
+        entries.add(new LinkEntry("Светиње храма", "http://www.spc.rs/sr/crkva"));
+        entries.add(new LinkEntry("Делатности храма", "http://www.spc.rs/sr/crkva"));
+        
+        for(LinkEntry entry : entries)
+        {
+            Link link = new Link();
+            link.setCaption(entry.caption);
+            try {
+                link.setURL(new URL(entry.url));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(PortalModel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                        
+            localLinks.add(link);
         }
         
         try {

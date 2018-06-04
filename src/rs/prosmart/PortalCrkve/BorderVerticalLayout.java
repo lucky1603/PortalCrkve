@@ -37,6 +37,7 @@ public class BorderVerticalLayout extends BorderPane {
     private VBox itemsBox;
     private VBox commandBox;
     private final ObservableList<LinkView> linkViews = FXCollections.observableArrayList();
+    private final ObservableList<LinkView> localLinkViews = FXCollections.observableArrayList();
     private SimpleObjectProperty<LinkView> selectedLinkViewProperty = new SimpleObjectProperty<>();
     private WebView connectedView;
     private PortalModel portalModel;
@@ -214,17 +215,32 @@ public class BorderVerticalLayout extends BorderPane {
         for(Link link : this.portalModel.getLinks())
         {
             LinkView linkView = new LinkView(link);
-            linkView.getStyleClass().add("submenu");
             linkView.setOnMouseClicked(e -> {
-                //this.selectLinkView(linkView);
                 this.setSelectedLinkView(linkView);
             });
             this.linkViews.add(linkView);
-        }            
+        }        
+        
+        this.localLinkViews.clear();
+        for(Link link : this.portalModel.getLocalLinks())
+        {
+            LinkView linkView = new LinkView(link);
+            linkView.setOnMouseClicked(e -> {
+                this.setSelectedLinkView(linkView);
+            });
+            this.localLinkViews.add(linkView);
+        }
 
         itemsBox = new VBox(5);            
         itemsBox.getChildren().add(title);
         for(LinkView linkView : this.linkViews)
+        {
+            itemsBox.getChildren().add(linkView);
+        }
+        
+        itemsBox.getChildren().add(new LinkSeparator());
+        
+        for(LinkView linkView : this.localLinkViews)
         {
             itemsBox.getChildren().add(linkView);
         }
