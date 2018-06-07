@@ -5,7 +5,6 @@
  */
 package rs.prosmart.PortalCrkve;
 
-import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.net.MalformedURLException;
 import javafx.application.Application;
@@ -14,10 +13,12 @@ import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import rs.prosmart.JSHandlers.JSHandlers;
+import rs.prosmart.calendar.model.CalendarModel;
+import rs.prosmart.calendar.model.Month;
+import rs.prosmart.calendar.model.Year;
 
 /**
  *
@@ -32,6 +33,16 @@ public class PortalCrkve extends Application {
 //        manager = new CookieManager();
 //        CookieHandler.setDefault(manager);
 //        manager.getCookieStore().removeAll();
+
+        CalendarModel calModel = new CalendarModel();
+        System.out.println(calModel.printToday());
+        for(int i = 0; i < calModel.getYear().getMonths().size(); i++)
+        {
+            Month month = calModel.getYear().getMonth(i);
+            System.out.println("\n\n\n");
+            System.out.println(month.getName());
+            month.printOutFull();
+        }
         
         webView = new WebView();
         //webView.getEngine().load(getClass().getResource("Prezentacije/Glavna.html").toExternalForm());
