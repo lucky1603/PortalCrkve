@@ -131,7 +131,8 @@ public class PortalModel {
         }
         
         try {
-            entryPoint = new URL("file:/D:/Prosmart/Crkva/html/glavna.html");
+//            entryPoint = new URL("file:/D:/Prosmart/Crkva/html/glavna.html");
+            entryPoint = new URL("http://localhost/1.html");
         } catch (MalformedURLException ex) {
             Logger.getLogger(PortalModel.class.getName()).log(Level.SEVERE, null, ex);
         }
