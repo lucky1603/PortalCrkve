@@ -1,0 +1,70 @@
+.vbox {
+    -fx-background-image: url(Slike/empty-background.png); 
+    -fx-min-width: 300px;
+}
+
+.caption {
+    -fx-text-fill: #175184;
+    -fx-font: 12 Arial;
+    -fx-font-weight: 600;
+    -fx-padding: 15 15 15 15;
+    
+}
+
+.frame, .separator {
+    -fx-pref-width: 350px;
+    -fx-min-height: 63px;    
+    -fx-insets: 25 25 25 25;
+    -fx-padding: 0 30 0 30;
+}
+
+.frame {
+    -fx-background-image: url(Slike/non-selected-background.png);
+}
+
+.separator {
+    -fx-background-image: url(Slike/separator-background.png);
+}
+
+
+.flow {
+    -fx-background-color: transparent;
+    -fx-min-height: 500px;
+}
+
+.title {
+    -fx-font: 25 Arial;
+    -fx-text-fill: #cddce9;    
+    -fx-padding: 10 0 10 60;
+}
+
+.selected {
+    -fx-background-image: url(Slike/selected-background2.png);
+    -fx-overflow: visible;
+}
+
+.selected .caption {
+    -fx-text-fill: white;
+}
+
+.selected .rect {
+    -fx-fill: transparent;
+}
+
+.rect {
+    -fx-fill: #cddce9;
+}
+
+.commands {
+    -fx-padding: 0 0 70 0;
+}
+
+.interactive {
+    -fx-font-size: 20;
+    -fx-text-fill: #cddce9;
+    -fx-max-width: 300;
+    /* -fx-padding: 0 0 0 30; */
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+}
+

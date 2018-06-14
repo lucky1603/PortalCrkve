@@ -5,6 +5,7 @@
  */
 package rs.prosmart.PortalCrkve;
 
+import com.teamdev.jxbrowser.chromium.javafx.BrowserView;
 import java.awt.Color;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -39,7 +40,7 @@ public class BorderVerticalLayout extends BorderPane {
     private final ObservableList<LinkView> linkViews = FXCollections.observableArrayList();
     private final ObservableList<LinkView> localLinkViews = FXCollections.observableArrayList();
     private SimpleObjectProperty<LinkView> selectedLinkViewProperty = new SimpleObjectProperty<>();
-    private WebView connectedView;
+    private BrowserView connectedView;
     private PortalModel portalModel;
     private ImageView exitImageView;
     private ImageView startImageView;
@@ -48,7 +49,7 @@ public class BorderVerticalLayout extends BorderPane {
     /**
      * Constructor
      */
-    public BorderVerticalLayout(WebView view, PortalModel model) throws MalformedURLException {
+    public BorderVerticalLayout(BrowserView view, PortalModel model) throws MalformedURLException {
         super();
         portalModel = model;
         connectedView = view;
@@ -82,14 +83,14 @@ public class BorderVerticalLayout extends BorderPane {
         // Mouse clicked.
         startImageView.setOnMouseClicked(e -> {
             URL url = this.portalModel.getEntryPoint();
-            this.connectedView.getEngine().load(url.toExternalForm());
+            this.connectedView.getBrowser().loadURL(url.toExternalForm());
             this.portalModel.setIsTheaterMode(true);
         });
         
         // Touch
         startImageView.setOnTouchPressed(e -> {
             URL url = this.portalModel.getEntryPoint();
-            this.connectedView.getEngine().load(url.toExternalForm());
+            this.connectedView.getBrowser().loadURL(url.toExternalForm());
             this.portalModel.setIsTheaterMode(true);
         });
         
@@ -124,17 +125,18 @@ public class BorderVerticalLayout extends BorderPane {
         // Mouse click.
         homeImageView.setOnMouseClicked(e -> {
             URL url = this.portalModel.getEntryPoint();
-            this.connectedView.getEngine().load(url.toExternalForm());
+            this.connectedView.getBrowser().loadURL(url.toExternalForm());
         });
         
         // Touch.
         homeImageView.setOnTouchPressed(e -> {
             //URL url = this.getSelectedLinkView().getLink().getURL();
             URL url = this.portalModel.getEntryPoint();
-            this.connectedView.getEngine().load(url.toExternalForm());
+            this.connectedView.getBrowser().loadURL(url.toExternalForm());
         });
         
         homeImageView.setVisible(false);        
+        
         
         //sPane.getChildren().add(startImageView);
         //sPane.setAlignment(Pos.CENTER);
@@ -146,6 +148,8 @@ public class BorderVerticalLayout extends BorderPane {
         sPane.getChildren().add(homeImageView);
         StackPane.setAlignment(homeImageView, Pos.TOP_LEFT);
         StackPane.setMargin(homeImageView, new Insets(20, 0, 0, 20));
+        
+
         
         Region spacer = new Region();
         VBox.setVgrow(spacer, Priority.ALWAYS);
@@ -254,8 +258,9 @@ public class BorderVerticalLayout extends BorderPane {
      */
     private void selectLinkView(LinkView linkView) {
         URL url = linkView.getLink().getURL();
-        connectedView.getEngine().load(url.toExternalForm());
+        connectedView.getBrowser().loadURL(url.toExternalForm());
         setSelectedLinkView(linkView);
+        connectedView.toBack();
         
     }
 

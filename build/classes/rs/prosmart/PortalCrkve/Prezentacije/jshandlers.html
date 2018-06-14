@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!-- jshandlers.html -->
+<html>
+    <head>
+        <title>Browsing Web Pages Using Jqva FX Web View</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript">
+            function promptUser() {
+                var userMsg = windows.prompt("Molimo unesite poruku:", "Vasa poruka");
+                document.getElementById("prompt_msg").innerHTML = userMsg;
+            }
+            
+            function showPopup() {
+                window.open("http://www.oracle.com");
+            }
+            
+            function showAlert() {
+                window.alert("Ovo je uzbuna!");
+            }
+            
+            function showConfirm() {
+                var userResponse = window.confirm("Jeste li sigurni da hocete da naucite Java FX?");
+                if(userResponse == true) {
+                    document.getElementById("confirm_msg").innerHTML = "Pristali ste."
+                } else {
+                    document.getElementById("confirm_msg").innerHTML = "Niste pristali."
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Using a WebView node to view webpages in JavaFX</h1>
+        
+        <p>Go to: <a href="http://www.yahoo.com">Yahoo!</a> &nbsp; &nbsp;
+        <a href="http://www.google.com">Google</a> &nbsp; &nbsp;
+        <a href="http://www.oracle.com">Oracle</a> <br/><br/>
+        
+        <b>Vasa poruka:</b> <span id="prompt_msg" style="color: red"></span>
+        <input type="button" name="prompt_btn" value="Unesite poruku" onclick="promptUser()"/>
+        
+        <p>Let us try showing a confirmation window. <span id="confirm_msg" style="color:red;"></span>
+        <input type="button" name="confirm_btn" value="Show a Confirmation Dialog" onclick="showConfirm()"/>
+        
+        <p>Let us try using a popup window.
+        <input type="button" name="popup_btn" value="Show a Popup" onclick="showPopup()"/>
+        </p>
+        
+        <p>Let us try showing an alert.
+        <input type="button" name="popup_btn" value="Show an Alert" onclick="showAlert()"/>
+        </p>
+        
+    </body>
+</html>

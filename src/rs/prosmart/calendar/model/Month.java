@@ -3,6 +3,7 @@
  */
 package rs.prosmart.calendar.model;
 
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -14,6 +15,7 @@ public class Month {
     private String name;
     private int countOfDays;
     private final ObservableList<Day> days = FXCollections.observableArrayList();
+    private SimpleBooleanProperty isCurrent = new SimpleBooleanProperty();
 
     /**
      * Constructor.
@@ -100,6 +102,33 @@ public class Month {
     }
     
     /**
+     * Is it current month.
+     * @return boolean Is it current or not.
+     */
+    public boolean getIsCurrent()
+    {
+        return this.isCurrent.get();
+    }
+    
+    /**
+     * Sets month as current.
+     * @param current Is it current or not.
+     */
+    public void setIsCurrent(boolean current)
+    {
+        this.isCurrent.set(current);
+    }
+    
+    /**
+     * Gets isBoolean property.
+     * @return SimpleBooleanProperty IsCurrent.
+     */
+    public SimpleBooleanProperty getIsCurrentProperty()
+    {
+        return this.isCurrent;
+    }
+    
+    /**
      * Test function, printing out the days.
      * @param count 
      */
@@ -121,14 +150,28 @@ public class Month {
         }
     }
     
-    public void printOutFull()
+    public void printOutFull(CalendarModel model)
     {
         String[] columns = new String[] {"\t", "\t", "\t", "\t", "\t", "\t", "\t"};
+        boolean currentDay = false;
         
         for(int i = 0; i < this.countOfDays; i++)
         {
             Day d = this.days.get(i);
-            columns[d.getCode() - 1] = d.getShortName() + "-" + d.getIndex() + "\t";
+            if(this.equals(model.getCurrentMonth()) && d.equals(model.getCurrentDay()))
+            {
+                currentDay = true;
+            } else {
+                currentDay = false;
+            }
+            if(currentDay)
+            {
+                columns[d.getCode() - 1] = d.getShortName() + "-" + d.getIndex() + "*" + "\t";
+                
+            } else {
+                columns[d.getCode() - 1] = d.getShortName() + "-" + d.getIndex() + "\t";
+            }
+            
             if(d.getCode() == 7 || i == this.countOfDays - 1)
             {
                 System.out.println(columns[0] + " " + columns[1] + " " + columns[2] + " " + columns[3] + " " + columns[4] + " " + columns[5] + " " + columns[6]);

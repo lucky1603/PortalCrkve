@@ -4,6 +4,8 @@
 package rs.prosmart.calendar.model;
 
 import java.util.Calendar;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleObjectProperty;
 
 /**
  * Day model class.
@@ -12,6 +14,7 @@ import java.util.Calendar;
 public class Day {    
     private int code = Calendar.SUNDAY;
     private int index = 0;
+    private SimpleBooleanProperty isCurrent = new SimpleBooleanProperty();
     
     /**
      * Constructor.
@@ -40,6 +43,21 @@ public class Day {
     {
         this.code = code;
         this.index = index;
+    }
+    
+    public boolean getIsCurrent()
+    {
+        return this.isCurrent.get();
+    }
+    
+    public void setIsCurrent(boolean value)
+    {
+        isCurrent.set(value);
+    }
+    
+    public SimpleBooleanProperty getIsCurrentProperty()
+    {
+        return isCurrent;
     }
     
     /**
