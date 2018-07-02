@@ -15,13 +15,15 @@ public class Day {
     private int code = Calendar.SUNDAY;
     private int index = 0;
     private SimpleBooleanProperty isCurrent = new SimpleBooleanProperty();
+    private Month month;
+    private boolean today;
     
     /**
      * Constructor.
      */
     public Day()
     {
-        
+        this.today = false;
     }
     
     /**
@@ -32,6 +34,7 @@ public class Day {
     {
         this.code = code;
         this.index = 0;
+        this.today = false;
     }
     
     /**
@@ -43,6 +46,29 @@ public class Day {
     {
         this.code = code;
         this.index = index;
+        this.today = false;
+    }
+    
+    /**
+     * Constructor.
+     * @param code
+     * @param index
+     * @param month 
+     */
+    public Day(int code, int index, Month month)
+    {
+        this(code, index);
+        this.month = month;
+    }
+    
+    public void setIsToday(boolean today)
+    {
+        this.today = today;
+    }
+    
+    public boolean getIsToday()
+    {
+        return this.today;
     }
     
     public boolean getIsCurrent()
@@ -58,6 +84,16 @@ public class Day {
     public SimpleBooleanProperty getIsCurrentProperty()
     {
         return isCurrent;
+    }
+    
+    public void setMonth(Month month)
+    {
+        this.month = month;
+    }
+    
+    public Month getMonth()
+    {
+        return this.month;
     }
     
     /**

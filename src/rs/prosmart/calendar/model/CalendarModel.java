@@ -35,13 +35,7 @@ public class CalendarModel {
      */
     public CalendarModel(Date date)
     {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        this.year = new Year(calendar.get(Calendar.YEAR));
-        this.currentMonth.set(this.year.getMonth(calendar.get(Calendar.MONTH)));
-        this.displayMonth.set(this.year.getMonth(calendar.get(Calendar.MONTH)));
-        this.currentDay.set(this.currentMonth.get().getDay(calendar.get(Calendar.DAY_OF_MONTH)));
-        this.displayDay.set(this.currentMonth.get().getDay(calendar.get(Calendar.DAY_OF_MONTH)));
+        this.setDate(date);
     }
     
     /**
@@ -57,6 +51,37 @@ public class CalendarModel {
         this.displayMonth.set(this.currentMonth.get());
         this.currentDay.set(this.currentMonth.get().getDay(day));
         this.displayDay.set(this.currentMonth.get().getDay(day));
+    }
+    
+    public void setDate(Date date)
+    {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        this.year = new Year(calendar.get(Calendar.YEAR));
+        this.currentMonth.set(this.year.getMonth(calendar.get(Calendar.MONTH)));
+        this.displayMonth.set(this.year.getMonth(calendar.get(Calendar.MONTH)));
+        this.currentDay.set(this.currentMonth.get().getDay(calendar.get(Calendar.DAY_OF_MONTH)));
+        this.displayDay.set(this.currentMonth.get().getDay(calendar.get(Calendar.DAY_OF_MONTH)));
+    }
+    
+    public void navigateLeft()
+    {
+        int index = year.getMonths().indexOf(this.getDisplayMonth());
+        if(index > 0)
+        {
+            index --;
+            this.displayMonth.set(year.getMonth(index));
+        }
+    }
+    
+    public void navigateRight()
+    {
+        int index = year.getMonths().indexOf(this.getDisplayMonth());
+        if(index < year.getMonths().size() - 1)
+        {
+            index ++;
+            this.displayMonth.set(year.getMonth(index));
+        }
     }
     
     /**
@@ -134,32 +159,46 @@ public class CalendarModel {
         return displayDay.get();
     }
     
-    public List<Map<String, Day>> getLinesForCurrentMonth()
+    public List<Map<Integer, Day>> getLinesForMonth(Month month)
     {
-        List<Map<String, Day>> lines = new ArrayList<>();
-        Map<String, Day> line = createLine();
-        Month month = this.getCurrentMonth();
+        List<Map<Integer, Day>> lines = new ArrayList<>();
+        Map<Integer, Day> line = createLine();
+        Day d = null;
         for(int i = 0; i < month.getCountOfDays(); i++)
         {
-            Day d = month.getDay(i);
-
+            d = month.getDay(i+1);
+            line.put(d.getCode(), d);
+            if(d.getCode() == 7)
+            {
+                lines.add(line);
+                line = createLine();
+            }
+        }
+        
+        if(d != null && d.getCode() != 7)
+        {
+            lines.add(line);
         }
         
         return lines;
     }
     
-    private Map<String, Day> createLine()
+    
+    
+    private Map<Integer, Day> createLine()
     {
-        Map<String, Day> line = new HashMap<>();
-        line.put("Ned", null);
-        line.put("Pon", null);
-        line.put("Uto", null);
-        line.put("Sre", null);
-        line.put("Čet", null);
-        line.put("Pet", null);
-        line.put("Sub", null);        
+        Map<Integer, Day> line = new HashMap<>();
+        line.put(1, null);
+        line.put(2, null);
+        line.put(3, null);
+        line.put(4, null);
+        line.put(5, null);
+        line.put(6, null);
+        line.put(7, null);        
         
         return line;
     }
+    
+    
     
 }

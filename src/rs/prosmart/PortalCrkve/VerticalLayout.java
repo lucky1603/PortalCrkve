@@ -22,6 +22,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebView;
+import rs.prosmart.calendar.control.CalendarPane;
 
 /**
  *
@@ -37,6 +38,7 @@ public class VerticalLayout extends SplitPane {
     private ImageView exitImageView;
     private ImageView startImageView;
     private ImageView homeImageView;
+    private CalendarPane calendarPane;
     
     /**
      * Constructor
@@ -45,6 +47,9 @@ public class VerticalLayout extends SplitPane {
         super();
         portalModel = model;
         connectedView = view;
+        calendarPane = new CalendarPane();
+        calendarPane.setPrefHeight(600);
+        calendarPane.setPrefWidth(600);
         
         this.initMenu();
                 
@@ -194,6 +199,18 @@ public class VerticalLayout extends SplitPane {
 
         itemsBox = new VBox(5);            
         itemsBox.getChildren().add(title);
+        ////////////////
+        Link calendarLink = new Link();
+        calendarLink.setCaption("Kalendar");
+        calendarLink.setURL(null);
+        LinkView calendarLinkView = new LinkView(calendarLink);
+        calendarLinkView.getStyleClass().add("submenu");
+        calendarLinkView.setOnMouseClicked(e -> {
+            //this.selectLinkView(linkView);
+            this.setSelectedLinkView(calendarLinkView);
+        });
+        itemsBox.getChildren().add(calendarLinkView);
+        ///////////////
         for(LinkView linkView : this.linkViews)
         {
             itemsBox.getChildren().add(linkView);
@@ -215,20 +232,32 @@ public class VerticalLayout extends SplitPane {
      */
     private void selectLinkView(LinkView linkView) {
         URL url = linkView.getLink().getURL();
-        connectedView.getEngine().load(url.toExternalForm());
-        setSelectedLinkView(linkView);
-        int index = this.linkViews.indexOf(this.getSelectedLinkView());
-        if(this.startImageView == null)
+        if(url == null)
         {
-            return;
+            this.getItems().set(1, calendarPane);
+        } else {
+            if(this.getItems().size() > 0 && !this.getItems().get(1).equals(connectedView))
+            {
+                this.getItems().set(1, connectedView);
+            }
+            
+            connectedView.getEngine().load(url.toExternalForm());
+            setSelectedLinkView(linkView);
+            int index = this.linkViews.indexOf(this.getSelectedLinkView());
+            if(this.startImageView == null)
+            {
+                return;
+            }
+
+            if(index == 0)
+            {
+                this.startImageView.setVisible(true);
+            } else {
+                this.startImageView.setVisible(false);
+            }
         }
         
-        if(index == 0)
-        {
-            this.startImageView.setVisible(true);
-        } else {
-            this.startImageView.setVisible(false);
-        }
+        
     }
 
     public void showNavigationMenu(boolean b) {

@@ -28,6 +28,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.web.WebView;
+import rs.prosmart.calendar.control.CalendarPane;
 
 /**
  *
@@ -45,6 +46,7 @@ public class BorderVerticalLayout extends BorderPane {
     private ImageView exitImageView;
     private ImageView startImageView;
     private ImageView homeImageView;
+    private CalendarPane calendarPane;
     
     /**
      * Constructor
@@ -53,6 +55,7 @@ public class BorderVerticalLayout extends BorderPane {
         super();
         portalModel = model;
         connectedView = view;
+        calendarPane = new CalendarPane();
         
         this.initMenu();
                 
@@ -237,6 +240,12 @@ public class BorderVerticalLayout extends BorderPane {
 
         itemsBox = new VBox(5);            
         itemsBox.getChildren().add(title);
+        ////////////////
+        Link calendarLink = new Link();
+        calendarLink.setCaption("Kalendar");
+        LinkView calendarLinkView = new LinkView(calendarLink);
+        itemsBox.getChildren().add(calendarLinkView);
+        ///////////////
         for(LinkView linkView : this.linkViews)
         {
             itemsBox.getChildren().add(linkView);

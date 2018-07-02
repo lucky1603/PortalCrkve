@@ -11,6 +11,8 @@ import com.teamdev.jxbrowser.chromium.internal.Environment;
 import com.teamdev.jxbrowser.chromium.javafx.BrowserView;
 import java.net.CookieManager;
 import java.net.MalformedURLException;
+import java.util.List;
+import java.util.Map;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -20,7 +22,9 @@ import javafx.stage.Stage;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import rs.prosmart.JSHandlers.JSHandlers;
+import rs.prosmart.calendar.control.CalendarPane;
 import rs.prosmart.calendar.model.CalendarModel;
+import rs.prosmart.calendar.model.Day;
 import rs.prosmart.calendar.model.Month;
 
 
@@ -33,31 +37,35 @@ public class PortalCrkve extends Application {
     private Browser browser;
     private BrowserView browserView;
     private CookieManager manager;
+    private CalendarPane calendarPane;
     
     @Override
     public void start(Stage primaryStage) throws MalformedURLException {     
-        browser = new Browser();
-        browserView = new BrowserView(browser);
-        CalendarModel calModel = new CalendarModel();
-        System.out.println(calModel.printToday());
-        for(int i = 0; i < calModel.getYear().getMonths().size(); i++)
-        {
-            System.out.println("\n\n\n");
-            Month month = calModel.getYear().getMonth(i);            
-            if(month.equals(calModel.getCurrentMonth()))
-            {
-                System.out.println(month.getName() + "*");
-            } else {
-                System.out.println(month.getName());
-            }
-                        
-            month.printOutFull(calModel);
-        }
+//        browser = new Browser();
+//        browserView = new BrowserView(browser);
+//        CalendarModel calModel = new CalendarModel();
+//        System.out.println(calModel.printToday());
+//        for(int i = 0; i < calModel.getYear().getMonths().size(); i++)
+//        {
+//            System.out.println("\n\n\n");
+//            Month month = calModel.getYear().getMonth(i);            
+//            if(month.equals(calModel.getCurrentMonth()))
+//            {
+//                System.out.println(month.getName() + "*");
+//            } else {
+//                System.out.println(month.getName());
+//            }
+//                        
+//            List<Map<Integer, Day>> lines = calModel.getLinesForMonth(month);
+//            
+//            month.printOutFull(calModel);                        
+//        }
         
         webView = new WebView();
         //webView.getEngine().load(getClass().getResource("Prezentacije/Glavna.html").toExternalForm());
         PortalModel model = new PortalModel();
-        BorderVerticalLayout verticalLayout = new BorderVerticalLayout(browserView, model);
+        //BorderVerticalLayout verticalLayout = new BorderVerticalLayout(browserView, model);
+        VerticalLayout verticalLayout = new VerticalLayout(webView, model);
         model.getIsTheaterModeProperty().addListener((o, stari, novi) -> {
             if(model.getIsTheaterMode())
             {
@@ -84,18 +92,18 @@ public class PortalCrkve extends Application {
             }
         });
         
-        browserView.widthProperty().addListener((ovalue, staro, novo) ->{
-            Document doc = webView.getEngine().getDocument();
-                if(doc != null)
-                {
-                    Element el = (Element) doc.getElementById("glavna");
-                    if(el != null)
-                    {
-                        el.setAttribute("width", novo.toString());                
-                    }
-                    
-                }
-        });
+//        browserView.widthProperty().addListener((ovalue, staro, novo) ->{
+//            Document doc = webView.getEngine().getDocument();
+//                if(doc != null)
+//                {
+//                    Element el = (Element) doc.getElementById("glavna");
+//                    if(el != null)
+//                    {
+//                        el.setAttribute("width", novo.toString());                
+//                    }
+//                    
+//                }
+//        });
         
         webView.heightProperty().addListener((o, stari, novi) -> {
             Document doc = webView.getEngine().getDocument();
@@ -107,6 +115,9 @@ public class PortalCrkve extends Application {
                 }                
             }            
         });
+        
+        calendarPane = new CalendarPane();
+        
         
         
         Scene scene = new Scene(verticalLayout, 1920, 1080);

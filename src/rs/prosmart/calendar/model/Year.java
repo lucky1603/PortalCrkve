@@ -114,7 +114,8 @@ public class Year {
             for(int i = 0; i < month.getCountOfDays(); i++)
             {
                 Day d = this.getWeekdayByIndex(counter);
-                d.setIndex(i + 1);                
+                d.setIndex(i + 1);     
+                d.setMonth(month);
                 month.getDays().add(d);                
                 counter++;
                 if(counter == 8)
