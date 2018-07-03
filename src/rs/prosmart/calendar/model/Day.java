@@ -5,6 +5,7 @@ package rs.prosmart.calendar.model;
 
 import java.lang.ref.WeakReference;
 import java.util.Calendar;
+import java.util.Date;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
@@ -12,7 +13,7 @@ import javafx.beans.property.SimpleObjectProperty;
  * Day model class.
  * @author Sinisa
  */
-public class Day {    
+public class Day implements Comparable {    
     private int code = Calendar.SUNDAY;
     private int index = 0;
     private SimpleBooleanProperty isCurrent = new SimpleBooleanProperty();
@@ -173,6 +174,28 @@ public class Day {
      */
     public void setIndex(int index) {
         this.index = index;
+    }
+    
+    public static Day getDayForDate(Date date)
+    {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        Year year = new Year(calendar.get(Calendar.YEAR));
+        Month month = year.getMonth(calendar.get(Calendar.MONTH));
+        Day day = month.getDay(calendar.get(Calendar.DAY_OF_MONTH));
+        return day;
+    }
+
+    @Override
+    public int compareTo(Object t) {
+        Day d = (Day)t;
+        if(this.getMonth().getName().equals(d.getMonth().getName()) && 
+           this.getIndex() == d.getIndex())
+        {
+            return 0;
+        }
+                        
+        return -1;
     }
     
 }

@@ -47,6 +47,7 @@ public class BorderVerticalLayout extends BorderPane {
     private ImageView startImageView;
     private ImageView homeImageView;
     private CalendarPane calendarPane;
+    private StackPane sPane;
     
     /**
      * Constructor
@@ -73,7 +74,7 @@ public class BorderVerticalLayout extends BorderPane {
             this.setSelectedLinkView(this.linkViews.get(0));
         }
                        
-        StackPane sPane = new StackPane();
+        sPane = new StackPane();
         sPane.getChildren().add(connectedView);
         
         Image img = new Image(PortalCrkve.class.getResource("Slike/3D-Glasses-icon-64.png").toExternalForm());
@@ -139,11 +140,7 @@ public class BorderVerticalLayout extends BorderPane {
         });
         
         homeImageView.setVisible(false);        
-        
-        
-        //sPane.getChildren().add(startImageView);
-        //sPane.setAlignment(Pos.CENTER);
-        
+                
         sPane.getChildren().add(exitImageView);
         StackPane.setAlignment(exitImageView, Pos.BOTTOM_RIGHT);        
         StackPane.setMargin(exitImageView, new Insets(0, 20, 30, 0 ));
@@ -151,8 +148,6 @@ public class BorderVerticalLayout extends BorderPane {
         sPane.getChildren().add(homeImageView);
         StackPane.setAlignment(homeImageView, Pos.TOP_LEFT);
         StackPane.setMargin(homeImageView, new Insets(20, 0, 0, 20));
-        
-
         
         Region spacer = new Region();
         VBox.setVgrow(spacer, Priority.ALWAYS);
@@ -173,7 +168,6 @@ public class BorderVerticalLayout extends BorderPane {
         this.setLeft(itemsBox);
         this.setCenter(sPane);    
         
-
     }
             
     // Properties    
@@ -243,7 +237,13 @@ public class BorderVerticalLayout extends BorderPane {
         ////////////////
         Link calendarLink = new Link();
         calendarLink.setCaption("Kalendar");
+        calendarLink.setURL(null);
         LinkView calendarLinkView = new LinkView(calendarLink);
+        calendarLinkView.getStyleClass().add("submenu");
+        calendarLinkView.setOnMouseClicked(e -> {
+            //this.selectLinkView(linkView);
+            this.setSelectedLinkView(calendarLinkView);
+        });
         itemsBox.getChildren().add(calendarLinkView);
         ///////////////
         for(LinkView linkView : this.linkViews)
@@ -267,10 +267,20 @@ public class BorderVerticalLayout extends BorderPane {
      */
     private void selectLinkView(LinkView linkView) {
         URL url = linkView.getLink().getURL();
-        connectedView.getBrowser().loadURL(url.toExternalForm());
-        setSelectedLinkView(linkView);
-        connectedView.toBack();
-        
+        if(url == null)
+        {
+            this.setCenter(calendarPane);
+        } else {
+            if(this.getCenter() == null || !this.getCenter().equals(sPane))
+            {
+                this.setCenter(sPane);
+            }
+            
+            connectedView.getBrowser().loadURL(url.toExternalForm());
+            setSelectedLinkView(linkView);
+            connectedView.toBack();
+        }
+                
     }
 
     public void showNavigationMenu(boolean b) {

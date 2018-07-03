@@ -32,6 +32,7 @@ public class VerticalLayout extends SplitPane {
     private VBox frameBox;
     private VBox itemsBox;
     private final ObservableList<LinkView> linkViews = FXCollections.observableArrayList();
+    private final ObservableList<LinkView> localLinkViews = FXCollections.observableArrayList();
     private SimpleObjectProperty<LinkView> selectedLinkViewProperty = new SimpleObjectProperty<>();
     private WebView connectedView;
     private PortalModel portalModel;
@@ -48,8 +49,6 @@ public class VerticalLayout extends SplitPane {
         portalModel = model;
         connectedView = view;
         calendarPane = new CalendarPane();
-        calendarPane.setPrefHeight(600);
-        calendarPane.setPrefWidth(600);
         
         this.initMenu();
                 
@@ -196,6 +195,16 @@ public class VerticalLayout extends SplitPane {
             });
             this.linkViews.add(linkView);
         }            
+        
+        this.localLinkViews.clear();
+        for(Link link : this.portalModel.getLocalLinks())
+        {
+            LinkView linkView = new LinkView(link);
+            linkView.setOnMouseClicked(e -> {
+                this.setSelectedLinkView(linkView);
+            });
+            this.localLinkViews.add(linkView);
+        }
 
         itemsBox = new VBox(5);            
         itemsBox.getChildren().add(title);
@@ -216,6 +225,12 @@ public class VerticalLayout extends SplitPane {
             itemsBox.getChildren().add(linkView);
         }
 
+        itemsBox.getChildren().add(new LinkSeparator());
+        
+        for(LinkView linkView : this.localLinkViews)
+        {
+            itemsBox.getChildren().add(linkView);
+        }
         itemsBox.getStyleClass().add("flow");
         itemsBox.setAlignment(Pos.CENTER);
 

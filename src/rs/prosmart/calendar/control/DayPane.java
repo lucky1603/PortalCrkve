@@ -9,6 +9,8 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import rs.prosmart.calendar.model.CalendarEvent;
+import rs.prosmart.calendar.model.CalendarEventType;
 import rs.prosmart.calendar.model.CalendarModel;
 import rs.prosmart.calendar.model.Day;
 
@@ -20,6 +22,7 @@ public class DayPane extends VBox {
     private Label lblMonth;
     private Label lblNumber;
     private Label lblDay;
+    private Label lblEvent;
     private Day day;
     private CalendarModel model;
     
@@ -27,18 +30,20 @@ public class DayPane extends VBox {
     {
         this.day = day;
         this.model = model;
-        
-        
+                
         lblMonth = new Label(day.getMonth().getName());
         lblNumber = new Label(String.format("%d", day.getIndex()));
         lblNumber.getStyleClass().add("index");
         lblDay = new Label(day.getName());
+        lblEvent = new Label("ABC");
+        lblEvent.setVisible(false);
         
         lblMonth.getStyleClass().add("calMonth");
         lblNumber.getStyleClass().add("calDayIndex");
         lblDay.getStyleClass().add("calDayName");
+        lblEvent.getStyleClass().add("calEvent");
         
-        this.getChildren().addAll(lblMonth, lblNumber, lblDay);
+        this.getChildren().addAll(lblMonth, lblNumber, lblEvent, lblDay);
         this.setAlignment(Pos.CENTER);
         this.setSpacing(5);
         if(this.day.equals(this.model.getCurrentDay()))
@@ -48,6 +53,15 @@ public class DayPane extends VBox {
             this.getStyleClass().add("day");
         }
         
+        this.model.getCalendarEvents().forEach(v -> {
+            if(v.getDay().compareTo(this.day) == 0 && v.getEventType() == CalendarEventType.HOLIDAY)
+            {
+                lblEvent.setText(v.getName());
+                lblEvent.setVisible(true);
+                this.getStyleClass().add("holiday");
+            }
+        });
+                        
         //this.getStylesheets().add(getClass().getResource("calendar.css").toExternalForm());
         
     }

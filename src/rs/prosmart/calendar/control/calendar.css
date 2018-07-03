@@ -57,3 +57,16 @@ and open the template in the editor.
     -fx-text-fill: #cddce9;
 }
 
+.holiday {
+    -fx-background-color: #cc0000;    
+}
+
+.holiday .calMonth, .holiday .calDayIndex, .holiday .calDayName, .holiday .calEvent {
+    -fx-text-fill: #cddce9;
+}
+
+.calEvent {
+    -fx-font: 15 Arial;
+    -fx-text-fill: #cddce9;
+}
+

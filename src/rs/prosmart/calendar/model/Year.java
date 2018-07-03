@@ -82,24 +82,24 @@ public class Year {
      * Initialize 'Months' collection.
      */
     private void initMonths() {
-        months.add(new Month("Januar", 31, false));
+        months.add(new Month(1, "Januar", 31, false));
         if(this.prestupna)
         {
-            months.add(new Month("Februar", 29, false));
+            months.add(new Month(2, "Februar", 29, false));
         } else {
-            months.add(new Month("Februar", 28, false));
+            months.add(new Month(2, "Februar", 28, false));
         }
         
-        months.add(new Month("Mart", 31, false));
-        months.add(new Month("April", 30, false));
-        months.add(new Month("Maj", 31, false));
-        months.add(new Month("Jun", 30, false));
-        months.add(new Month("Jul", 31, false));
-        months.add(new Month("Avgust", 31, false));
-        months.add(new Month("Septembar", 30, false));
-        months.add(new Month("Oktobar", 31, false));
-        months.add(new Month("Novembar", 30, false));
-        months.add(new Month("Decembar", 31, false));
+        months.add(new Month(3, "Mart", 31, false));
+        months.add(new Month(4, "April", 30, false));
+        months.add(new Month(5, "Maj", 31, false));
+        months.add(new Month(6, "Jun", 30, false));
+        months.add(new Month(7, "Jul", 31, false));
+        months.add(new Month(8, "Avgust", 31, false));
+        months.add(new Month(9, "Septembar", 30, false));
+        months.add(new Month(10, "Oktobar", 31, false));
+        months.add(new Month(11, "Novembar", 30, false));
+        months.add(new Month(12, "Decembar", 31, false));
     }
 
     private void calibrate() throws ParseException {

@@ -3,12 +3,18 @@
  */
 package rs.prosmart.calendar.model;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.property.SimpleObjectProperty;
 
 /**
@@ -19,8 +25,8 @@ public class CalendarModel {
     private SimpleObjectProperty<Month> currentMonth = new SimpleObjectProperty<>();
     private SimpleObjectProperty<Month> displayMonth = new SimpleObjectProperty<>();
     private SimpleObjectProperty<Day> currentDay = new SimpleObjectProperty<>();
-    private SimpleObjectProperty<Day> displayDay = new SimpleObjectProperty<>();
-    private Map<Day, CalendarEvent> events = new HashMap<Day, CalendarEvent>();
+    private SimpleObjectProperty<Day> displayDay = new SimpleObjectProperty<>();    
+    private List<CalendarEvent> events = new ArrayList<>();
             
     /**
      * Constructor.
@@ -187,7 +193,7 @@ public class CalendarModel {
         return lines;
     }
     
-    public Map<Day, CalendarEvent> getCalendarEvents()
+    public List<CalendarEvent> getCalendarEvents()
     {
         return this.events;
     }
@@ -213,13 +219,24 @@ public class CalendarModel {
         
         // Init today's event.
         Day today = this.getCurrentDay();
-        this.events.put(today, new CalendarEvent(today));
+        this.events.add(new CalendarEvent(today));
         
         this.loadEventsFromConfiguration();
     }
 
-    private void loadEventsFromConfiguration() {
-        
+    private void loadEventsFromConfiguration()  {
+       DateFormat format = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMAN);
+       Date date;
+        try {
+            date = format.parse("06.07.2018");
+            Day day = Day.getDayForDate(date);
+            CalendarEvent event = new CalendarEvent(day, "Света мученица Агрипина", "");
+            event.setEventType(CalendarEventType.HOLIDAY);
+            this.events.add(event);
+        } catch (ParseException ex) {
+            Logger.getLogger(CalendarModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
     }
     
     

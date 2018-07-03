@@ -16,11 +16,13 @@ public class Month {
     private int countOfDays;
     private final ObservableList<Day> days = FXCollections.observableArrayList();
     private SimpleBooleanProperty isCurrent = new SimpleBooleanProperty();
+    private int index;
 
     /**
      * Constructor.
      */
     public Month() {
+        index = 0;
         name = "Unknown";
         countOfDays = 31;
     }
@@ -31,7 +33,7 @@ public class Month {
      * @param countOfDays int Count of days in the month.
      * @param initialize  boolean Should the days of the month be initialized.
      */
-    public Month(String name, int countOfDays, boolean initialize)
+    public Month(int index, String name, int countOfDays, boolean initialize)
     {
         this.name = name;
         this.countOfDays = countOfDays;
@@ -43,6 +45,15 @@ public class Month {
             }    
         }
         
+    }
+    
+    /**
+     * Returns the index of the month.
+     * @return 
+     */
+    public int getIndex()
+    {
+        return this.index;
     }
     
     /**

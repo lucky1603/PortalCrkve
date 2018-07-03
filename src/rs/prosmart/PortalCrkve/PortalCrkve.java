@@ -9,10 +9,13 @@ import com.teamdev.jxbrowser.chromium.Browser;
 import com.teamdev.jxbrowser.chromium.BrowserCore;
 import com.teamdev.jxbrowser.chromium.internal.Environment;
 import com.teamdev.jxbrowser.chromium.javafx.BrowserView;
+import java.io.IOException;
 import java.net.CookieManager;
 import java.net.MalformedURLException;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -41,31 +44,27 @@ public class PortalCrkve extends Application {
     
     @Override
     public void start(Stage primaryStage) throws MalformedURLException {     
-//        browser = new Browser();
-//        browserView = new BrowserView(browser);
-//        CalendarModel calModel = new CalendarModel();
-//        System.out.println(calModel.printToday());
-//        for(int i = 0; i < calModel.getYear().getMonths().size(); i++)
-//        {
-//            System.out.println("\n\n\n");
-//            Month month = calModel.getYear().getMonth(i);            
-//            if(month.equals(calModel.getCurrentMonth()))
-//            {
-//                System.out.println(month.getName() + "*");
-//            } else {
-//                System.out.println(month.getName());
-//            }
-//                        
-//            List<Map<Integer, Day>> lines = calModel.getLinesForMonth(month);
-//            
-//            month.printOutFull(calModel);                        
-//        }
         
+        // I approach.
+        String currentDir = System.getProperty("user.dir");
+        ApplicationContext app = ApplicationContext.getInstance();
+        app.getGeneralSettings().put("AppPath", currentDir);
+        app.getGeneralSettings().put("ConfigFileName", "PortalCrkve.xml");           
+        
+        try {
+            app.loadConfiguration();
+        } catch (IOException ex) {
+            Logger.getLogger(PortalCrkve.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        browser = new Browser();
+        browserView = new BrowserView(browser);
+                        
         webView = new WebView();
         //webView.getEngine().load(getClass().getResource("Prezentacije/Glavna.html").toExternalForm());
         PortalModel model = new PortalModel();
-        //BorderVerticalLayout verticalLayout = new BorderVerticalLayout(browserView, model);
-        VerticalLayout verticalLayout = new VerticalLayout(webView, model);
+        BorderVerticalLayout verticalLayout = new BorderVerticalLayout(browserView, model);
+//        VerticalLayout verticalLayout = new VerticalLayout(webView, model);
         model.getIsTheaterModeProperty().addListener((o, stari, novi) -> {
             if(model.getIsTheaterMode())
             {
@@ -92,18 +91,18 @@ public class PortalCrkve extends Application {
             }
         });
         
-//        browserView.widthProperty().addListener((ovalue, staro, novo) ->{
-//            Document doc = webView.getEngine().getDocument();
-//                if(doc != null)
-//                {
-//                    Element el = (Element) doc.getElementById("glavna");
-//                    if(el != null)
-//                    {
-//                        el.setAttribute("width", novo.toString());                
-//                    }
-//                    
-//                }
-//        });
+        browserView.widthProperty().addListener((ovalue, staro, novo) ->{
+            Document doc = webView.getEngine().getDocument();
+                if(doc != null)
+                {
+                    Element el = (Element) doc.getElementById("glavna");
+                    if(el != null)
+                    {
+                        el.setAttribute("width", novo.toString());                
+                    }
+                    
+                }
+        });
         
         webView.heightProperty().addListener((o, stari, novi) -> {
             Document doc = webView.getEngine().getDocument();
@@ -116,12 +115,11 @@ public class PortalCrkve extends Application {
             }            
         });
         
-        calendarPane = new CalendarPane();
-        
-        
-        
+        calendarPane = new CalendarPane();                       
+                                                
         Scene scene = new Scene(verticalLayout, 1920, 1080);
         scene.getStylesheets().add(getClass().getResource("crkva.css").toExternalForm());
+   
         
         primaryStage.setTitle("Portal Crkve");
         primaryStage.setScene(scene);
