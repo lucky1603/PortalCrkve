@@ -25,24 +25,24 @@ public class CalendarPane extends VBox {
     private MonthPane monthPane;
     private CalendarModel model;
     
-    public CalendarPane()
+    public CalendarPane(CalendarModel model)
     {
-        monthPane = new MonthPane();
+        monthPane = new MonthPane(model);
         monthPane.prefWidthProperty().bind(this.widthProperty());
         monthPane.prefHeightProperty().bind(this.heightProperty().subtract(50));
         
         monthPane.getStyleClass().add("month");
         //monthPane.prefHeightProperty().bind(this.heightProperty() - 20);
-        model = monthPane.getModel();
+        this.model = model;
         navLeft = new Button("Prethodni");
         navLeft.setOnAction(e -> {
             // Model navigate left.
-            model.navigateLeft();
+            this.model.navigateLeft();
         });
         
         navRight = new Button("Sledeci");
         navRight.setOnAction(e -> {
-            model.navigateRight();
+            this.model.navigateRight();
         });
         
         lblMonth = new Label(model.getDisplayMonth().getName());

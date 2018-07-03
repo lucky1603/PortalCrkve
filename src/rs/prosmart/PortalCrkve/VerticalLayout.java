@@ -48,7 +48,8 @@ public class VerticalLayout extends SplitPane {
         super();
         portalModel = model;
         connectedView = view;
-        calendarPane = new CalendarPane();
+        ApplicationContext app = ApplicationContext.getInstance();
+        calendarPane = new CalendarPane(app.getCalendarModel());
         
         this.initMenu();
                 

@@ -23,8 +23,9 @@ import rs.prosmart.calendar.model.Month;
 public class MonthPane extends GridPane {
     CalendarModel model = new CalendarModel();
     ObservableList<DayPane> dayPanes = FXCollections.observableArrayList();
-    public MonthPane()
+    public MonthPane(CalendarModel model)
     {     
+        this.model = model;
         this.setMonth(model.getCurrentMonth());        
     }
     

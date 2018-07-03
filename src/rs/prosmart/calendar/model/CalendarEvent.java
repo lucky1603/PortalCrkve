@@ -5,6 +5,7 @@
  */
 package rs.prosmart.calendar.model;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -26,6 +27,10 @@ public class CalendarEvent {
     private Day day;
     private URL descriptionUrl;
     private URL imgUrl;
+    
+    public CalendarEvent() {
+        
+    }
     
     /**
      * Constructor.
@@ -61,6 +66,8 @@ public class CalendarEvent {
         this(day, name, description);
         this.img = img;
     }
+
+    
     
     /**
      * Gets name.
@@ -107,24 +114,40 @@ public class CalendarEvent {
         this.eventType = type;
     }
     
-    public void loadConfig(org.w3c.dom.Element config) throws ParseException
+    /**
+     * Load event from configuration node.
+     * @param config
+     * @throws ParseException
+     * @throws MalformedURLException 
+     */
+    public void loadConfig(org.w3c.dom.Element config) throws ParseException, MalformedURLException
     {
         Day day;
         String name;
         URL url;
         
-        Element dateElement = (Element) config.getElementsByTagName("Date").item(0);                
+        // Do daljnjeg. I ovo ce se uskoro ucitavati iz konfiguracije.
+        this.eventType = CalendarEventType.HOLIDAY;
+        
+        Element dateElement = (Element) config.getElementsByTagName("date").item(0);                
         if(dateElement != null)
         {
             DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMAN);
             Date date = dateFormat.parse(dateElement.getTextContent());
-            day = Day.getDayForDate(date);
+            this.day = Day.getDayForDate(date);
         }
         
-        Element nameElement = (Element) config.getElementsByTagName("Name").item(0);
+        Element nameElement = (Element) config.getElementsByTagName("name").item(0);
         if(nameElement != null)
         {
-            
+            this.name = nameElement.getTextContent();
         }
+        
+        Element urlElement = (Element) config.getElementsByTagName("url").item(0);
+        if(urlElement != null)
+        {
+            this.descriptionUrl = new URL(urlElement.getTextContent());
+        }
+
     }
 }

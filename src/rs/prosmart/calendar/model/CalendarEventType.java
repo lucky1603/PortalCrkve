@@ -10,7 +10,7 @@ package rs.prosmart.calendar.model;
  * @author Sinisa
  */
 public enum CalendarEventType {
-    TODAY(0), HOLIDAY(1), MEETING(2),TASK(4);
+    TODAY(0), HOLIDAY(1), MEETING(2),TASK(3);
     private int value;
     private CalendarEventType(int value)
     {

@@ -12,6 +12,7 @@ import com.teamdev.jxbrowser.chromium.javafx.BrowserView;
 import java.io.IOException;
 import java.net.CookieManager;
 import java.net.MalformedURLException;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -43,7 +44,7 @@ public class PortalCrkve extends Application {
     private CalendarPane calendarPane;
     
     @Override
-    public void start(Stage primaryStage) throws MalformedURLException {     
+    public void start(Stage primaryStage) throws MalformedURLException, ParseException {     
         
         // I approach.
         String currentDir = System.getProperty("user.dir");
@@ -113,9 +114,7 @@ public class PortalCrkve extends Application {
                     el.setAttribute("height", novi.toString());                
                 }                
             }            
-        });
-        
-        calendarPane = new CalendarPane();                       
+        });        
                                                 
         Scene scene = new Scene(verticalLayout, 1920, 1080);
         scene.getStylesheets().add(getClass().getResource("crkva.css").toExternalForm());

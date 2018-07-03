@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.SimpleObjectProperty;
+import rs.prosmart.PortalCrkve.ApplicationContext;
 
 /**
  * @author Sinisa
@@ -58,7 +59,6 @@ public class CalendarModel {
         this.displayMonth.set(this.currentMonth.get());
         this.currentDay.set(this.currentMonth.get().getDay(day));
         this.displayDay.set(this.currentMonth.get().getDay(day));
-        this.initEvents();
         
     }
     
@@ -71,7 +71,6 @@ public class CalendarModel {
         this.displayMonth.set(this.year.getMonth(calendar.get(Calendar.MONTH)));
         this.currentDay.set(this.currentMonth.get().getDay(calendar.get(Calendar.DAY_OF_MONTH)));
         this.displayDay.set(this.currentMonth.get().getDay(calendar.get(Calendar.DAY_OF_MONTH)));
-        this.initEvents();
     }
     
     public void navigateLeft()
@@ -214,31 +213,5 @@ public class CalendarModel {
         return line;
     }
 
-    private void initEvents() {
-        this.events.clear();
-        
-        // Init today's event.
-        Day today = this.getCurrentDay();
-        this.events.add(new CalendarEvent(today));
-        
-        this.loadEventsFromConfiguration();
-    }
 
-    private void loadEventsFromConfiguration()  {
-       DateFormat format = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMAN);
-       Date date;
-        try {
-            date = format.parse("06.07.2018");
-            Day day = Day.getDayForDate(date);
-            CalendarEvent event = new CalendarEvent(day, "Света мученица Агрипина", "");
-            event.setEventType(CalendarEventType.HOLIDAY);
-            this.events.add(event);
-        } catch (ParseException ex) {
-            Logger.getLogger(CalendarModel.class.getName()).log(Level.SEVERE, null, ex);
-        }
-       
-    }
-    
-    
-    
 }

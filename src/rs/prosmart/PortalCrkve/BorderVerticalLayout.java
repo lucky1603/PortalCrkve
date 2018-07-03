@@ -6,7 +6,6 @@
 package rs.prosmart.PortalCrkve;
 
 import com.teamdev.jxbrowser.chromium.javafx.BrowserView;
-import java.awt.Color;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DateFormat;
@@ -18,7 +17,6 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.control.SplitPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -26,8 +24,6 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.TextAlignment;
-import javafx.scene.web.WebView;
 import rs.prosmart.calendar.control.CalendarPane;
 
 /**
@@ -56,7 +52,8 @@ public class BorderVerticalLayout extends BorderPane {
         super();
         portalModel = model;
         connectedView = view;
-        calendarPane = new CalendarPane();
+        ApplicationContext app = ApplicationContext.getInstance();
+        calendarPane = new CalendarPane(app.getCalendarModel());
         
         this.initMenu();
                 
