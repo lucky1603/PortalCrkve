@@ -6,9 +6,11 @@
 package rs.prosmart.calendar.control;
 
 import javafx.geometry.Pos;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.TextAlignment;
 import rs.prosmart.calendar.model.CalendarEvent;
 import rs.prosmart.calendar.model.CalendarEventType;
 import rs.prosmart.calendar.model.CalendarModel;
@@ -42,6 +44,10 @@ public class DayPane extends VBox {
         lblNumber.getStyleClass().add("calDayIndex");
         lblDay.getStyleClass().add("calDayName");
         lblEvent.getStyleClass().add("calEvent");
+        lblEvent.setWrapText(true);
+        lblEvent.setTextAlignment(TextAlignment.CENTER);
+        
+        
         
         this.getChildren().addAll(lblMonth, lblNumber, lblEvent, lblDay);
         this.setAlignment(Pos.CENTER);
@@ -54,11 +60,19 @@ public class DayPane extends VBox {
         }
         
         this.model.getCalendarEvents().forEach(v -> {
-            if(v.getDay().compareTo(this.day) == 0 && v.getEventType() == CalendarEventType.HOLIDAY)
-            {
-                lblEvent.setText(v.getName());
-                lblEvent.setVisible(true);
-                this.getStyleClass().add("holiday");
+            if(v.getDay().compareTo(this.day) == 0) {
+                if(v.getEventType() == CalendarEventType.HOLIDAY)
+                {
+                    lblEvent.setText(v.getName());
+                    lblEvent.setVisible(true);
+                    this.getStyleClass().add("holiday");
+                }
+                
+                if(v.getEventType() == CalendarEventType.TASK)
+                {
+                    lblEvent.setText(v.getName());
+                    lblEvent.setVisible(true);
+                }
             }
         });
                         

@@ -129,6 +129,8 @@ public class CalendarEvent {
         // Do daljnjeg. I ovo ce se uskoro ucitavati iz konfiguracije.
         this.eventType = CalendarEventType.HOLIDAY;
         
+        this.eventType = CalendarEventType.valueOf(config.getAttribute("type"));
+        
         Element dateElement = (Element) config.getElementsByTagName("date").item(0);                
         if(dateElement != null)
         {

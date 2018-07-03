@@ -8,19 +8,19 @@ and open the template in the editor.
 
 <settings>
     <CalendarEvents>
-        <Event type="3">
+        <Event type="TASK">
             <date>06.07.2018</date>
             <name>Света мученица Агрипина; владимирска икона Мајке Божије</name>
             <url>http://www.google.com</url>
             <image></image>
         </Event>        
-        <Event type="1">
+        <Event type="HOLIDAY">
             <date>11.07.2018</date>
             <name>РОЂЕЊЕ СВЕТОГ ЈОВАНА ПРЕТЕЧЕ - ИВАЊДАН</name>
             <url>http://www.google.com</url>
             <image></image>
         </Event>
-        <Event type="1">
+        <Event type="HOLIDAY">
             <date>12.07.2018</date>
             <name>СВЕТИ АПОСТОЛИ ПЕТАР И ПАВЛЕ - ПЕТРОВДАН</name>
             <url>http://www.google.com</url>
