@@ -11,20 +11,49 @@ and open the template in the editor.
 .main {
     -fx-width: 100%;
     -fx-height: 100%;
-    -fx-border-color: red;
+    -fx-background-color: #175184;
 }
 
 .month {
-    -fx-border-color: green;
+    /* -fx-border-color: green; */
 }
 
 .day {
     
-    -fx-border-color: blue;
+    -fx-background-color: #cddce9;
+    -fx-padding: 5 5 5 5;
 }
 
-.index {
+.today {
+    -fx-background-color: #000055;
+    
+    -fx-padding: 5 5 5 5;
+}
+
+.calDayIndex {
     
     -fx-font: 50 Arial;
+}
+
+.today .calDayIndex {
+    -fx-text-fill: #cddce9;
+}
+
+.calDayName {
+    -fx-text-fill: #175184;
+    -fx-font: 20 Arial;
+}
+
+.today .calDayName {
+    -fx-text-fill: #cddce9;
+}
+
+.calMonth {
+    -fx-text-fill: #175184;
+    -fx-font: 20 Arial;
+}
+
+.today .calMonth {
+    -fx-text-fill: #cddce9;
 }
 

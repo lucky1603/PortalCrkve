@@ -3,6 +3,7 @@
  */
 package rs.prosmart.calendar.model;
 
+import java.lang.ref.WeakReference;
 import java.util.Calendar;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -17,6 +18,7 @@ public class Day {
     private SimpleBooleanProperty isCurrent = new SimpleBooleanProperty();
     private Month month;
     private boolean today;
+    
     
     /**
      * Constructor.
@@ -48,6 +50,7 @@ public class Day {
         this.index = index;
         this.today = false;
     }
+    
     
     /**
      * Constructor.

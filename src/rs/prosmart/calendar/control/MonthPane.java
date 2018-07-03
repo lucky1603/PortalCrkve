@@ -49,7 +49,7 @@ public class MonthPane extends GridPane {
                 if(d == null)
                     continue;
                 
-                DayPane dPane = new DayPane(d);
+                DayPane dPane = new DayPane(this.model, d);
                 this.add(dPane, i - 1, j);                
             }
         }
@@ -70,6 +70,9 @@ public class MonthPane extends GridPane {
             cc.setPercentWidth(100 / 7.0);
             this.getColumnConstraints().add(cc);
         }
+        
+        this.setHgap(10);
+        this.setVgap(10);
         
     }
     

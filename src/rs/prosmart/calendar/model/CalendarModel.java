@@ -20,6 +20,7 @@ public class CalendarModel {
     private SimpleObjectProperty<Month> displayMonth = new SimpleObjectProperty<>();
     private SimpleObjectProperty<Day> currentDay = new SimpleObjectProperty<>();
     private SimpleObjectProperty<Day> displayDay = new SimpleObjectProperty<>();
+    private Map<Day, CalendarEvent> events = new HashMap<Day, CalendarEvent>();
             
     /**
      * Constructor.
@@ -51,6 +52,8 @@ public class CalendarModel {
         this.displayMonth.set(this.currentMonth.get());
         this.currentDay.set(this.currentMonth.get().getDay(day));
         this.displayDay.set(this.currentMonth.get().getDay(day));
+        this.initEvents();
+        
     }
     
     public void setDate(Date date)
@@ -62,6 +65,7 @@ public class CalendarModel {
         this.displayMonth.set(this.year.getMonth(calendar.get(Calendar.MONTH)));
         this.currentDay.set(this.currentMonth.get().getDay(calendar.get(Calendar.DAY_OF_MONTH)));
         this.displayDay.set(this.currentMonth.get().getDay(calendar.get(Calendar.DAY_OF_MONTH)));
+        this.initEvents();
     }
     
     public void navigateLeft()
@@ -183,6 +187,11 @@ public class CalendarModel {
         return lines;
     }
     
+    public Map<Day, CalendarEvent> getCalendarEvents()
+    {
+        return this.events;
+    }
+    
     
     
     private Map<Integer, Day> createLine()
@@ -197,6 +206,20 @@ public class CalendarModel {
         line.put(7, null);        
         
         return line;
+    }
+
+    private void initEvents() {
+        this.events.clear();
+        
+        // Init today's event.
+        Day today = this.getCurrentDay();
+        this.events.put(today, new CalendarEvent(today));
+        
+        this.loadEventsFromConfiguration();
+    }
+
+    private void loadEventsFromConfiguration() {
+        
     }
     
     
