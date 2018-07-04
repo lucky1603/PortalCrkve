@@ -5,6 +5,7 @@
  */
 package rs.prosmart.PortalCrkve;
 
+import com.teamdev.jxbrowser.chromium.javafx.BrowserView;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DateFormat;
@@ -13,24 +14,31 @@ import java.util.Date;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebView;
+import rs.prosmart.calendar.control.CalendarLinkDialog;
 import rs.prosmart.calendar.control.CalendarPane;
+import rs.prosmart.calendar.control.DayPane;
 
 /**
  *
  * @author Sinisa
  */
-public class VerticalLayout extends SplitPane {
-    private VBox frameBox;
+public class VerticalLayout extends BorderPane implements EventHandler {
     private VBox itemsBox;
+    private VBox commandBox;
     private final ObservableList<LinkView> linkViews = FXCollections.observableArrayList();
     private final ObservableList<LinkView> localLinkViews = FXCollections.observableArrayList();
     private SimpleObjectProperty<LinkView> selectedLinkViewProperty = new SimpleObjectProperty<>();
@@ -39,7 +47,10 @@ public class VerticalLayout extends SplitPane {
     private ImageView exitImageView;
     private ImageView startImageView;
     private ImageView homeImageView;
+    private ImageView calendarImageView;
+    private LinkView calendarLinkView;
     private CalendarPane calendarPane;
+    private StackPane sPane;
     
     /**
      * Constructor
@@ -49,6 +60,7 @@ public class VerticalLayout extends SplitPane {
         portalModel = model;
         connectedView = view;
         ApplicationContext app = ApplicationContext.getInstance();
+        app.setEventHandler(this);
         calendarPane = new CalendarPane(app.getCalendarModel());
         
         this.initMenu();
@@ -67,69 +79,84 @@ public class VerticalLayout extends SplitPane {
             this.setSelectedLinkView(this.linkViews.get(0));
         }
                        
-        StackPane sPane = new StackPane();
+        sPane = new StackPane();
         sPane.getChildren().add(connectedView);
         
-        Image img = new Image(PortalCrkve.class.getResource("Slike/Actions-media-playback-start-icon.png").toExternalForm());
+        Image img = new Image(PortalCrkve.class.getResource("Slike/3D-Glasses-icon-64.png").toExternalForm());
         startImageView = new ImageView();
         startImageView.setImage(img);
-        startImageView.setScaleX(0.3);
-        startImageView.setScaleY(0.3);
+        //startImageView.setScaleX(0.15);
+        //startImageView.setScaleY(0.15);
         startImageView.setOpacity(0.8);
         
         // Mouse clicked.
         startImageView.setOnMouseClicked(e -> {
+            URL url = this.portalModel.getEntryPoint();
+            this.connectedView.getEngine().load(url.toExternalForm());
             this.portalModel.setIsTheaterMode(true);
         });
         
         // Touch
         startImageView.setOnTouchPressed(e -> {
+            URL url = this.portalModel.getEntryPoint();
+            this.connectedView.getEngine().load(url.toExternalForm());
             this.portalModel.setIsTheaterMode(true);
         });
         
         Image exitImg = new Image(PortalCrkve.class.getResource("Slike/Log-Out-icon-128.png").toExternalForm());
         exitImageView = new ImageView();
         exitImageView.setImage(exitImg);
-        //exitImageView.setScaleX(0.15);
-        //exitImageView.setScaleY(0.15);
+        exitImageView.setScaleX(0.5);
+        exitImageView.setScaleY(0.5);
         exitImageView.setOpacity(0.9);
         
         // Mouse click.
-        exitImageView.setOnMouseClicked(e -> {
+        exitImageView.setOnMouseClicked(e -> {            
             this.portalModel.setIsTheaterMode(false);
+            LinkView linkView = this.linkViews.get(0);
+            this.selectLinkView(linkView);            
         });
         
         // Touch.
-        exitImageView.setOnTouchPressed(e -> {
+        exitImageView.setOnTouchPressed(e -> {            
             this.portalModel.setIsTheaterMode(false);
+            LinkView linkView = this.linkViews.get(0);
+            this.selectLinkView(linkView);            
         });
         
         exitImageView.setVisible(false);
         
+        Image calendarImage = new Image(PortalCrkve.class.getResource("Slike/Calendar-icon-64x64.png").toExternalForm());
+        calendarImageView = new ImageView();
+        calendarImageView.setImage(calendarImage);
+        calendarImageView.setOpacity(0.8);
+        calendarImageView.setOnMouseClicked(e -> {
+            this.selectLinkView(calendarLinkView);
+            this.calendarImageView.setVisible(false);
+        });
+        
+        calendarImageView.setVisible(false);
+        
         Image homeImg = new Image(PortalCrkve.class.getResource("Slike/home-icon-blue.png").toExternalForm());
         homeImageView = new ImageView();
         homeImageView.setImage(homeImg);
-        exitImageView.setScaleX(0.5);
-        exitImageView.setScaleY(0.5);
         homeImageView.setOpacity(0.8);
         
         // Mouse click.
         homeImageView.setOnMouseClicked(e -> {
-            URL url = this.getSelectedLinkView().getLink().getURL();
+            URL url = this.portalModel.getEntryPoint();
             this.connectedView.getEngine().load(url.toExternalForm());
         });
         
         // Touch.
         homeImageView.setOnTouchPressed(e -> {
-            URL url = this.getSelectedLinkView().getLink().getURL();
+            //URL url = this.getSelectedLinkView().getLink().getURL();
+            URL url = this.portalModel.getEntryPoint();
             this.connectedView.getEngine().load(url.toExternalForm());
         });
         
         homeImageView.setVisible(false);        
-        
-        sPane.getChildren().add(startImageView);
-        sPane.setAlignment(Pos.CENTER);
-        
+                
         sPane.getChildren().add(exitImageView);
         StackPane.setAlignment(exitImageView, Pos.BOTTOM_RIGHT);        
         StackPane.setMargin(exitImageView, new Insets(0, 20, 30, 0 ));
@@ -138,9 +165,30 @@ public class VerticalLayout extends SplitPane {
         StackPane.setAlignment(homeImageView, Pos.TOP_LEFT);
         StackPane.setMargin(homeImageView, new Insets(20, 0, 0, 20));
         
-        this.getItems().addAll(frameBox, sPane);
-        this.setDividerPosition(0, 0.19);
+        sPane.getChildren().add(calendarImageView);
+        StackPane.setAlignment(calendarImageView, Pos.TOP_LEFT);
+        StackPane.setMargin(calendarImageView, new Insets(20, 0, 0, 20));
+        
+        Region spacer = new Region();
+        VBox.setVgrow(spacer, Priority.ALWAYS);
+        itemsBox.getChildren().add(spacer);
+        
+        Label lblInteractive = new Label("Интерактивна екскурзија");
+        lblInteractive.getStyleClass().add("interactive");
+        lblInteractive.setWrapText(true);
+        //lblInteractive.setTextAlignment(TextAlignment.CENTER);
 
+        commandBox = new VBox(5, lblInteractive, startImageView);
+        commandBox.setAlignment(Pos.CENTER);
+        commandBox.getStyleClass().add("commands");
+        
+        itemsBox.getChildren().add(commandBox);        
+        itemsBox.prefWidth(400);
+        
+        this.setLeft(itemsBox);
+        this.setCenter(sPane);    
+       
+        
     }
             
     // Properties    
@@ -189,13 +237,11 @@ public class VerticalLayout extends SplitPane {
         for(Link link : this.portalModel.getLinks())
         {
             LinkView linkView = new LinkView(link);
-            linkView.getStyleClass().add("submenu");
             linkView.setOnMouseClicked(e -> {
-                //this.selectLinkView(linkView);
                 this.setSelectedLinkView(linkView);
             });
             this.linkViews.add(linkView);
-        }            
+        }        
         
         this.localLinkViews.clear();
         for(Link link : this.portalModel.getLocalLinks())
@@ -213,7 +259,7 @@ public class VerticalLayout extends SplitPane {
         Link calendarLink = new Link();
         calendarLink.setCaption("Kalendar");
         calendarLink.setURL(null);
-        LinkView calendarLinkView = new LinkView(calendarLink);
+        calendarLinkView = new LinkView(calendarLink);
         calendarLinkView.getStyleClass().add("submenu");
         calendarLinkView.setOnMouseClicked(e -> {
             //this.selectLinkView(linkView);
@@ -225,21 +271,15 @@ public class VerticalLayout extends SplitPane {
         {
             itemsBox.getChildren().add(linkView);
         }
-
+        
         itemsBox.getChildren().add(new LinkSeparator());
         
         for(LinkView linkView : this.localLinkViews)
         {
             itemsBox.getChildren().add(linkView);
         }
-        itemsBox.getStyleClass().add("flow");
-        itemsBox.setAlignment(Pos.CENTER);
 
-        frameBox = new VBox(itemsBox);
-        frameBox.getStyleClass().add("vbox");
-        frameBox.prefWidth(250);                        
-            
-        
+        itemsBox.getStyleClass().add("vbox");        
     }
 
     /**
@@ -250,40 +290,28 @@ public class VerticalLayout extends SplitPane {
         URL url = linkView.getLink().getURL();
         if(url == null)
         {
-            this.getItems().set(1, calendarPane);
+            this.setCenter(calendarPane);
         } else {
-            if(this.getItems().size() > 0 && !this.getItems().get(1).equals(connectedView))
+            if(this.getCenter() == null || !this.getCenter().equals(sPane))
             {
-                this.getItems().set(1, connectedView);
+                this.setCenter(sPane);
             }
             
             connectedView.getEngine().load(url.toExternalForm());
             setSelectedLinkView(linkView);
-            int index = this.linkViews.indexOf(this.getSelectedLinkView());
-            if(this.startImageView == null)
-            {
-                return;
-            }
-
-            if(index == 0)
-            {
-                this.startImageView.setVisible(true);
-            } else {
-                this.startImageView.setVisible(false);
-            }
+            connectedView.toBack();
         }
-        
-        
+                
     }
 
     public void showNavigationMenu(boolean b) {
         if(!b)
         {
-            this.getItems().remove(frameBox);
+            this.setLeft(null);
+            
 
         } else {
-            this.getItems().add(0, frameBox);
-            this.setDividerPosition(0, 0.18);
+            this.setLeft(itemsBox);
         }     
         
         int idx = this.linkViews.indexOf(this.getSelectedLinkView());
@@ -291,5 +319,24 @@ public class VerticalLayout extends SplitPane {
         startImageView.setVisible(b);        
         exitImageView.setVisible(!b);
         homeImageView.setVisible(!b);
+    }
+    
+    public void showCalendarLink(URL url)
+    {
+        
+    }
+
+    @Override
+    public void handle(Event event) {
+        DayPane dPane = (DayPane) event.getSource();
+        if(dPane != null)
+        {
+            URL url = dPane.getLinkUrl();
+            if(url != null)
+            {
+                CalendarLinkDialog dlg = new CalendarLinkDialog(dPane.getLinkUrl());
+                dlg.showAndWait();
+            }
+        }
     }
 }

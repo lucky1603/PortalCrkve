@@ -5,12 +5,15 @@
  */
 package rs.prosmart.calendar.control;
 
+import java.net.URL;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
+import rs.prosmart.PortalCrkve.ApplicationContext;
 import rs.prosmart.calendar.model.CalendarEvent;
 import rs.prosmart.calendar.model.CalendarEventType;
 import rs.prosmart.calendar.model.CalendarModel;
@@ -27,6 +30,7 @@ public class DayPane extends VBox {
     private Label lblEvent;
     private Day day;
     private CalendarModel model;
+    private URL linkUrl;
     
     public DayPane(CalendarModel model, Day day)
     {
@@ -66,17 +70,28 @@ public class DayPane extends VBox {
                     lblEvent.setText(v.getName());
                     lblEvent.setVisible(true);
                     this.getStyleClass().add("holiday");
+                    this.linkUrl = v.getLinkUrl();                    
                 }
                 
                 if(v.getEventType() == CalendarEventType.TASK)
                 {
                     lblEvent.setText(v.getName());
                     lblEvent.setVisible(true);
+                    this.linkUrl = v.getLinkUrl();
                 }
             }
         });
+        
+        ApplicationContext app = ApplicationContext.getInstance();
+        this.setOnMouseClicked(app.getEventHandler());
                         
         //this.getStylesheets().add(getClass().getResource("calendar.css").toExternalForm());
         
     }
+    
+    public URL getLinkUrl()
+    {
+        return this.linkUrl;
+    }
+    
 }

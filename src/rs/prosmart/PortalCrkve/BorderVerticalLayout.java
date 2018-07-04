@@ -14,6 +14,8 @@ import java.util.Date;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -25,6 +27,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import rs.prosmart.calendar.control.CalendarPane;
+import rs.prosmart.calendar.control.DayPane;
 
 /**
  *
@@ -74,9 +77,11 @@ public class BorderVerticalLayout extends BorderPane {
         sPane = new StackPane();
         sPane.getChildren().add(connectedView);
         
+        
         Image img = new Image(PortalCrkve.class.getResource("Slike/3D-Glasses-icon-64.png").toExternalForm());
         startImageView = new ImageView();
         startImageView.setImage(img);
+
         //startImageView.setScaleX(0.15);
         //startImageView.setScaleY(0.15);
         startImageView.setOpacity(0.8);
@@ -163,7 +168,7 @@ public class BorderVerticalLayout extends BorderPane {
         itemsBox.prefWidth(400);
         
         this.setLeft(itemsBox);
-        this.setCenter(sPane);    
+        this.setCenter(sPane);            
         
     }
             
@@ -296,4 +301,5 @@ public class BorderVerticalLayout extends BorderPane {
         exitImageView.setVisible(!b);
         homeImageView.setVisible(!b);
     }
+
 }

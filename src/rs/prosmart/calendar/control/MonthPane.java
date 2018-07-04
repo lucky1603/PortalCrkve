@@ -7,11 +7,14 @@ package rs.prosmart.calendar.control;
 
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import rs.prosmart.PortalCrkve.ApplicationContext;
 import rs.prosmart.calendar.model.CalendarModel;
 import rs.prosmart.calendar.model.Day;
 import rs.prosmart.calendar.model.Month;
@@ -77,5 +80,13 @@ public class MonthPane extends GridPane {
         
     }
     
-   
+   public void registerForEvents()
+   {
+       ApplicationContext app = ApplicationContext.getInstance();
+       EventHandler handler = app.getEventHandler();
+       if(handler != null)
+       {
+           this.dayPanes.forEach(p -> p.setOnMouseClicked(handler));           
+       }
+   }
 }

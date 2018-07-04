@@ -60,13 +60,11 @@ public class CalendarPane extends VBox {
         this.getChildren().addAll(commandPanel, monthPane);
         this.getStyleClass().add("main");
         this.getStylesheets().add(getClass().getResource("calendar.css").toExternalForm());
-        
+
+        monthPane.registerForEvents();
         
     }
     
-    public void fitSize(Node parent)
-    {
-        
-    }
+
     
 }

@@ -7,6 +7,7 @@ package rs.prosmart.PortalCrkve;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.EventHandler;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -33,6 +35,7 @@ public class ApplicationContext {
     List<CalendarEvent> events = new ArrayList<>();
     Map<String, Object> generalSettings = new HashMap<>();    
     CalendarModel calendarModel = new CalendarModel();
+    WeakReference handler;
     
     private static class Holder {
         static final ApplicationContext INSTANCE = new ApplicationContext();
@@ -55,6 +58,31 @@ public class ApplicationContext {
     public CalendarModel getCalendarModel()
     {
         return this.calendarModel;            
+    }
+    
+    /**
+     * Sets the actual event handler for the child component events.
+     * @param handler 
+     */
+    public void setEventHandler(EventHandler handler)
+    {
+        if(this.handler != null)
+        {
+            this.handler.clear();
+        }
+                        
+        this.handler = new WeakReference<>(handler);
+    }
+    
+    /**
+     * Gets the actual event handler for the child components.
+     * @return Object which handles the control events.
+     */
+    public EventHandler getEventHandler()
+    {
+        if(this.handler != null)
+            return (EventHandler) this.handler.get();
+        return null;
     }
     
     /**

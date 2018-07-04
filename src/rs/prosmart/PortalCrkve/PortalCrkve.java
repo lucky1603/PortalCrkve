@@ -58,14 +58,14 @@ public class PortalCrkve extends Application {
             Logger.getLogger(PortalCrkve.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        browser = new Browser();
-        browserView = new BrowserView(browser);
+//        browser = new Browser();
+//        browserView = new BrowserView(browser);
                         
         webView = new WebView();
         //webView.getEngine().load(getClass().getResource("Prezentacije/Glavna.html").toExternalForm());
         PortalModel model = new PortalModel();
-        BorderVerticalLayout verticalLayout = new BorderVerticalLayout(browserView, model);
-//        VerticalLayout verticalLayout = new VerticalLayout(webView, model);
+//        BorderVerticalLayout verticalLayout = new BorderVerticalLayout(browserView, model);
+        VerticalLayout verticalLayout = new VerticalLayout(webView, model);
         model.getIsTheaterModeProperty().addListener((o, stari, novi) -> {
             if(model.getIsTheaterMode())
             {
@@ -92,18 +92,18 @@ public class PortalCrkve extends Application {
             }
         });
         
-        browserView.widthProperty().addListener((ovalue, staro, novo) ->{
-            Document doc = webView.getEngine().getDocument();
-                if(doc != null)
-                {
-                    Element el = (Element) doc.getElementById("glavna");
-                    if(el != null)
-                    {
-                        el.setAttribute("width", novo.toString());                
-                    }
-                    
-                }
-        });
+//        browserView.widthProperty().addListener((ovalue, staro, novo) ->{
+//            Document doc = webView.getEngine().getDocument();
+//                if(doc != null)
+//                {
+//                    Element el = (Element) doc.getElementById("glavna");
+//                    if(el != null)
+//                    {
+//                        el.setAttribute("width", novo.toString());                
+//                    }
+//                    
+//                }
+//        });
         
         webView.heightProperty().addListener((o, stari, novi) -> {
             Document doc = webView.getEngine().getDocument();

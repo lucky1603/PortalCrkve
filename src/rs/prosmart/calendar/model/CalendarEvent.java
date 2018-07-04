@@ -25,8 +25,7 @@ public class CalendarEvent {
     private Image img = null;
     private CalendarEventType eventType = CalendarEventType.TODAY;
     private Day day;
-    private URL descriptionUrl;
-    private URL imgUrl;
+    private URL linkUrl;
     
     public CalendarEvent() {
         
@@ -67,7 +66,23 @@ public class CalendarEvent {
         this.img = img;
     }
 
+    /**
+     * Gets the link URL.
+     * @return URL Address of the link to navigate to.
+     */
+    public URL getLinkUrl()
+    {
+        return this.linkUrl;
+    }
     
+    /**
+     * Sets the link address.
+     * @param url 
+     */
+    public void setLinkUrl(URL url)
+    {
+        this.linkUrl = url;
+    }
     
     /**
      * Gets name.
@@ -121,14 +136,8 @@ public class CalendarEvent {
      * @throws MalformedURLException 
      */
     public void loadConfig(org.w3c.dom.Element config) throws ParseException, MalformedURLException
-    {
-        Day day;
-        String name;
-        URL url;
-        
-        // Do daljnjeg. I ovo ce se uskoro ucitavati iz konfiguracije.
-        this.eventType = CalendarEventType.HOLIDAY;
-        
+    {        
+        // Do daljnjeg. I ovo ce se uskoro ucitavati iz konfiguracije.        
         this.eventType = CalendarEventType.valueOf(config.getAttribute("type"));
         
         Element dateElement = (Element) config.getElementsByTagName("date").item(0);                
@@ -148,8 +157,7 @@ public class CalendarEvent {
         Element urlElement = (Element) config.getElementsByTagName("url").item(0);
         if(urlElement != null)
         {
-            this.descriptionUrl = new URL(urlElement.getTextContent());
+            this.linkUrl = new URL(urlElement.getTextContent());
         }
-
     }
 }
