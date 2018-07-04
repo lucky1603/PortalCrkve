@@ -35,7 +35,6 @@ import rs.prosmart.calendar.control.DayPane;
  * @author Sinisa
  */
 public class BorderVerticalLayout extends BorderPane implements EventHandler {
-    private VBox frameBox;
     private VBox itemsBox;
     private VBox commandBox;
     private final ObservableList<LinkView> linkViews = FXCollections.observableArrayList();

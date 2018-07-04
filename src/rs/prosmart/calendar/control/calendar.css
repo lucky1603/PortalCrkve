@@ -57,6 +57,10 @@ and open the template in the editor.
     -fx-text-fill: #cddce9;
 }
 
+.today .calEvent {
+    -fx-text-fill: #cddce9;
+}
+
 /* Holiday */
 .holiday {
     -fx-background-color: #cc0000;    
@@ -70,6 +74,17 @@ and open the template in the editor.
     -fx-font: 12 Arial;
     -fx-alignment: center;
     /* -fx-text-fill: #cddce9; */
+}
+
+.calendar-control-panel {
+    
+}
+
+.calendar-month-title {
+    -fx-font: 30 Arial;
+    -fx-text-fill: #FFD700; /* gold */
+    /* -fx-text-fill: #DAA520; */ /* golden rod */
+    /* -fx-text-fill: #F0E68C; */ /* gold */        
 }
 
 /* Named day */

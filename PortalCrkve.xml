@@ -8,22 +8,91 @@ and open the template in the editor.
 
 <settings>
     <CalendarEvents>
+         <Event type="TASK">
+            <date>01.07.2018</date>
+            <name>Свети мученици Леонтије; Ипатије и Теодул</name>
+            <image></image>
+        </Event>  
+         <Event type="TASK">
+            <date>02.07.2018</date>
+            <name>Свети апостол Јуда; преподобни Пајсије Велики; свети Јован Шангајски</name>
+            <image></image>
+        </Event>  
+         <Event type="TASK">
+            <date>03.07.2018</date>
+            <name>Свети свештеномученик Методије; Преподобни Наум Охридски</name>
+            <image></image>
+        </Event>  
+         <Event type="TASK">
+            <date>04.07.2018</date>
+            <name>Свети мученик Јулијан Тарсијски; Преподобни Јулије и Јулијан</name>
+            <image></image>
+        </Event>  
+         <Event type="TASK">
+            <date>05.07.2018</date>
+            <name>Свети свештеномученик Јевсевије; преподобна Анастасија Српска</name>
+            <image></image>
+        </Event>  
         <Event type="TASK">
             <date>06.07.2018</date>
             <name>Света мученица Агрипина; владимирска икона Мајке Божије</name>
-            <url>http://www.google.com</url>
             <image></image>
         </Event>        
         <Event type="HOLIDAY">
-            <date>11.07.2018</date>
-            <name>РОЂЕЊЕ СВЕТОГ ЈОВАНА ПРЕТЕЧЕ - ИВАЊДАН</name>
+            <date>07.07.2018</date>
+            <name>+++ РОЂЕЊЕ СВЕТОГ ЈОВАНА ПРЕТЕЧЕ - ИВАЊДАН</name>
             <url>file:/d:/prosmart/crkva/html/svjovanpreteca.htm</url>
+            <image></image>
+        </Event>
+        <Event type="TASK">
+            <date>08.07.2018</date>
+            <name>Света преподобномученица Февронија</name>
+            <image></image>
+        </Event>
+        <Event type="TASK">
+            <date>09.07.2018</date>
+            <name>Преподобни Давид Солунски</name>
+            <image></image>
+        </Event>
+        <Event type="TASK">
+            <date>10.07.2018</date>
+            <name>Преподобни Сампсон Странопримац</name>
+            <image></image>
+        </Event>
+        <Event type="TASK">
+            <date>11.07.2018</date>
+            <name>Пренос моштију св. бесребреника Кира и Јована; св. муч. Дабробосан. и Милешев.</name>
             <image></image>
         </Event>
         <Event type="HOLIDAY">
             <date>12.07.2018</date>
-            <name>СВЕТИ АПОСТОЛИ ПЕТАР И ПАВЛЕ - ПЕТРОВДАН</name>
-            <url>http://www.google.com</url>
+            <name>+++ СВЕТИ АПОСТОЛИ ПЕТАР И ПАВЛЕ - ПЕТРОВДАН</name>
+            <image></image>
+            <url>file:///D:/Prosmart/Crkva/html/svetiapostolpetar.htm</url>
+        </Event>
+        <Event type="TASK">
+            <date>13.07.2018</date>
+            <name>Сабор светих дванаест апостола - Павловдан</name>
+            <image></image>
+        </Event>
+        <Event type="TASK">
+            <date>14.07.2018</date>
+            <name>Свети мученици и бесребреници Козма и Дамјан</name>
+            <image></image>
+        </Event>
+        <Event type="TASK">
+            <date>15.07.2018</date>
+            <name>Полагање ризе Пресвете Богородице</name>
+            <image></image>
+        </Event>
+        <Event type="TASK">
+            <date>16.07.2018</date>
+            <name>Свети мученик Јакинт и преподобни Анатолије</name>
+            <image></image>
+        </Event>
+        <Event type="TASK">
+            <date>17.07.2018</date>
+            <name>Свети Андреј Критски; Св. свештеномученик Сава Горњокарловачки</name>
             <image></image>
         </Event>
     </CalendarEvents>
