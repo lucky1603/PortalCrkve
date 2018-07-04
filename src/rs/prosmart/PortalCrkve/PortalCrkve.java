@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.net.CookieManager;
 import java.net.MalformedURLException;
 import java.text.ParseException;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
@@ -44,6 +45,7 @@ public class PortalCrkve extends Application {
         // I approach.
         String currentDir = System.getProperty("user.dir");
         ApplicationContext app = ApplicationContext.getInstance();
+        app.setLocale(new Locale("ru", "RU"));
         app.getGeneralSettings().put("AppPath", currentDir);
         app.getGeneralSettings().put("ConfigFileName", "PortalCrkve.xml");           
         

@@ -9,8 +9,11 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import rs.prosmart.PortalCrkve.PortalCrkve;
 import rs.prosmart.calendar.model.CalendarModel;
 import rs.prosmart.calendar.model.Month;
 
@@ -20,8 +23,8 @@ import rs.prosmart.calendar.model.Month;
  */
 public class CalendarPane extends VBox {
     private HBox commandPanel;
-    private Button navLeft;
-    private Button navRight;
+    private ImageView navLeft;
+    private ImageView navRight;
     private Label lblMonth;
     private MonthPane monthPane;
     private CalendarModel model;
@@ -35,16 +38,19 @@ public class CalendarPane extends VBox {
         monthPane.getStyleClass().add("month");
         //monthPane.prefHeightProperty().bind(this.heightProperty() - 20);
         this.model = model;
-        navLeft = new Button("Prethodni");
-        navLeft.setOnAction(e -> {
+        
+        navLeft = new ImageView(new Image(PortalCrkve.class.getResource("Slike/arrow-left-icon.png").toExternalForm()));
+        navLeft.setOnMouseClicked(e -> {
             // Model navigate left.
             this.model.navigateLeft();
         });
         
-        navRight = new Button("Sledeci");
-        navRight.setOnAction(e -> {
+//        navRight = new Button("Sledeci");
+        navRight = new ImageView(new Image(PortalCrkve.class.getResource("Slike/arrow-right-icon.png").toExternalForm()));
+        navRight.setOnMouseClicked(e -> {
             this.model.navigateRight();
         });
+        
         
         lblMonth = new Label(model.getDisplayMonth().getName());
         lblMonth.getStyleClass().add("calendar-month-title");

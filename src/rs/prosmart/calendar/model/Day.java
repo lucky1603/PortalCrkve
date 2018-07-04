@@ -8,6 +8,7 @@ import java.util.Calendar;
 import java.util.Date;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import rs.prosmart.PortalCrkve.ApplicationContext;
 
 /**
  * Day model class.
@@ -106,21 +107,22 @@ public class Day implements Comparable {
      */
     public String getName()
     {
+        ApplicationContext app = ApplicationContext.getInstance();
         switch(this.code) {
             case Calendar.SUNDAY: 
-                return "Nedelja";
+                return app.getLabel("Sunday");
             case Calendar.MONDAY:
-                return "Ponedeljak";
+                return app.getLabel("Monday");
             case Calendar.TUESDAY:
-                return "Utorak";
+                return app.getLabel("Tuesday");
             case Calendar.WEDNESDAY:
-                return "Sreda";
+                return app.getLabel("Wednesday");
             case Calendar.THURSDAY:
-                return "Četvrtak";
+                return app.getLabel("Tuesday");
             case Calendar.FRIDAY:
-                return "Petak";
+                return app.getLabel("Friday");
             default:
-                return "Subota";
+                return app.getLabel("Saturday");
                 
         }
     }

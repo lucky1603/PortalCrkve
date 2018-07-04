@@ -12,7 +12,9 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.EventHandler;
@@ -32,9 +34,14 @@ import rs.prosmart.calendar.model.CalendarModel;
  * @author Sinisa
  */
 public class ApplicationContext {
+    // Localization.
+    Locale locale;
+    ResourceBundle messages;
+    ResourceBundle labels;
+    
     List<CalendarEvent> events = new ArrayList<>();
     Map<String, Object> generalSettings = new HashMap<>();    
-    CalendarModel calendarModel = new CalendarModel();
+    CalendarModel calendarModel;
     WeakReference handler;
     
     private static class Holder {
@@ -83,6 +90,42 @@ public class ApplicationContext {
         if(this.handler != null)
             return (EventHandler) this.handler.get();
         return null;
+    }
+    
+    /**
+     * Sets the current locale.
+     * @param locale 
+     */
+    public void setLocale(Locale locale)
+    {
+        this.locale = locale;
+        this.labels = ResourceBundle.getBundle("LabelsBundle", this.locale);
+        this.calendarModel = new CalendarModel(locale);
+    }
+    
+    public Locale getLocale()
+    {
+        return this.locale;
+    }
+    
+        /**
+     * Wrapper for getting of the translated values. It handles the cases if the translated value is not present.
+     * @param key
+     * @return 
+     */
+    public String getLabel(String key)
+    {
+        if(this.labels == null || !this.labels.containsKey(key))
+        {
+            return key;            
+        }
+        
+        return this.labels.getString(key);
+    }
+    
+    public ResourceBundle getLabels()
+    {
+        return this.labels;
     }
     
     /**

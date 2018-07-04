@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import rs.prosmart.PortalCrkve.ApplicationContext;
 
 /**
  * Year model for the calendar model.
@@ -82,24 +83,26 @@ public class Year {
      * Initialize 'Months' collection.
      */
     private void initMonths() {
-        months.add(new Month(1, "Januar", 31, false));
+        ApplicationContext app = ApplicationContext.getInstance();
+        
+        months.add(new Month(1, app.getLabel("January"), 31, false));
         if(this.prestupna)
         {
-            months.add(new Month(2, "Februar", 29, false));
+            months.add(new Month(2, app.getLabel("February"), 29, false));
         } else {
-            months.add(new Month(2, "Februar", 28, false));
+            months.add(new Month(2, app.getLabel("February"), 28, false));
         }
         
-        months.add(new Month(3, "Mart", 31, false));
-        months.add(new Month(4, "April", 30, false));
-        months.add(new Month(5, "Maj", 31, false));
-        months.add(new Month(6, "Jun", 30, false));
-        months.add(new Month(7, "Jul", 31, false));
-        months.add(new Month(8, "Avgust", 31, false));
-        months.add(new Month(9, "Septembar", 30, false));
-        months.add(new Month(10, "Oktobar", 31, false));
-        months.add(new Month(11, "Novembar", 30, false));
-        months.add(new Month(12, "Decembar", 31, false));
+        months.add(new Month(3, app.getLabel("March"), 31, false));
+        months.add(new Month(4, app.getLabel("April"), 30, false));
+        months.add(new Month(5, app.getLabel("May"), 31, false));
+        months.add(new Month(6, app.getLabel("June"), 30, false));
+        months.add(new Month(7, app.getLabel("July"), 31, false));
+        months.add(new Month(8, app.getLabel("August"), 31, false));
+        months.add(new Month(9, app.getLabel("September"), 30, false));
+        months.add(new Month(10, app.getLabel("Oktober"), 31, false));
+        months.add(new Month(11, app.getLabel("November"), 30, false));
+        months.add(new Month(12, app.getLabel("December"), 31, false));
     }
 
     private void calibrate() throws ParseException {

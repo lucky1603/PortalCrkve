@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.SimpleObjectProperty;
@@ -22,6 +23,8 @@ import rs.prosmart.PortalCrkve.ApplicationContext;
  * @author Sinisa
  */
 public class CalendarModel {
+    private Locale locale;
+    private ResourceBundle labels;
     private Year year;
     private SimpleObjectProperty<Month> currentMonth = new SimpleObjectProperty<>();
     private SimpleObjectProperty<Month> displayMonth = new SimpleObjectProperty<>();
@@ -32,17 +35,18 @@ public class CalendarModel {
     /**
      * Constructor.
      */
-    public CalendarModel()
+    public CalendarModel(Locale locale)
     {
-        this(new Date());
+        this(locale, new Date());
     }
     
     /**
      * Constructor.
      * @param date  A specific date.
      */
-    public CalendarModel(Date date)
+    public CalendarModel(Locale locale, Date date)
     {
+        this.setLocale(locale);
         this.setDate(date);
     }
     
@@ -168,6 +172,30 @@ public class CalendarModel {
         return displayDay.get();
     }
     
+    /**
+     * Sets the working locale.
+     * @param locale 
+     */
+    public void setLocale(Locale locale) {
+        this.locale = locale;
+        this.labels = ResourceBundle.getBundle("LabelsBundle", this.locale);
+    }
+    
+    /**
+     * Gets localized string.
+     * @param key
+     * @return 
+     */
+    public String getLabel(String key)
+    {
+        if(!key.isEmpty() && this.labels.containsKey(key))
+        {
+            return this.labels.getString(key);
+        }
+        
+        return key;
+    }
+    
     public List<Map<Integer, Day>> getLinesForMonth(Month month)
     {
         List<Map<Integer, Day>> lines = new ArrayList<>();
@@ -212,6 +240,8 @@ public class CalendarModel {
         
         return line;
     }
+
+
 
 
 }

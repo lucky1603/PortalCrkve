@@ -95,5 +95,75 @@ and open the template in the editor.
             <name>Свети Андреј Критски; Св. свештеномученик Сава Горњокарловачки</name>
             <image></image>
         </Event>
+        <Event type="TASK">
+            <date>18.07.2018</date>
+            <name>Преподобни Атанасије Атонски; свети Сергије Радоњешки</name>
+            <image></image>
+        </Event>
+        <Event type="TASK">
+            <date>19.07.2018</date>
+            <name>Преподобни Сисоје Велики</name>
+            <image></image>
+        </Event>
+        <Event type="TASK">
+            <date>20.07.2018</date>
+            <name>Преподобни Тома Малеин и света мученица Недеља</name>
+            <image></image>
+        </Event>
+        <Event type="TASK">
+            <date>21.07.2018</date>
+            <name>Свети великомученик Прокопије</name>
+            <image></image>
+        </Event>
+        <Event type="TASK">
+            <date>22.07.2018</date>
+            <name>Свештеномученик Панкратије; свети Теодор; св. муч. Гламочки и Куленвакуфски</name>
+            <image></image>
+        </Event>
+        <Event type="TASK">
+            <date>23.07.2018</date>
+            <name>Светих 45 мученика из Никопоља; преп. Антоније Печерски</name>
+            <image></image>
+        </Event>
+        <Event type="TASK">
+            <date>24.07.2018</date>
+            <name>Света великомученица Јефимија и блажена Олга</name>
+            <image></image>
+        </Event>
+        <Event type="TASK">
+            <date>25.07.2018</date>
+            <name>Св. муч. Прокло и Иларије; икона Пресвете Богородице Тројеручице</name>
+            <image></image>
+        </Event>
+        <Event type="TASK">
+            <date>26.07.2018</date>
+            <name>Сабор светог архангела Гаврила</name>
+            <image></image>
+        </Event>
+        <Event type="TASK">
+            <date>27.07.2018</date>
+            <name>Свети апостол Акила; преподобни Никодим</name>
+            <image></image>
+        </Event>
+        <Event type="TASK">
+            <date>28.07.2018</date>
+            <name>Свети мученици Кирик и Јулита; свети Владимир, велики кнез руски</name>
+            <image></image>
+        </Event>
+        <Event type="TASK">
+            <date>29.07.2018</date>
+            <name>Свети свештеномученик Атиноген; света мученица Јулија</name>
+            <image></image>
+        </Event>
+        <Event type="TASK">
+            <date>30.07.2018</date>
+            <name>Света великомученица Марина - Огњена Марија</name>
+            <image></image>
+        </Event>
+        <Event type="TASK">
+            <date>31.07.2018</date>
+            <name>Свети мученик Емилијан и мученик Јакинт</name>
+            <image></image>
+        </Event>
     </CalendarEvents>
 </settings>
