@@ -5,21 +5,19 @@
  */
 package rs.prosmart.calendar.control;
 
-import java.awt.Color;
 import java.net.URL;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.web.WebView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.scene.paint.Color;
 import rs.prosmart.PortalCrkve.PortalCrkve;
 
 /**
@@ -33,8 +31,7 @@ public class CalendarLinkDialog extends Stage {
     
     public CalendarLinkDialog(URL url)
     {   
-        super(StageStyle.UNDECORATED);
-        
+        super(StageStyle.TRANSPARENT);        
         this.initModality(Modality.APPLICATION_MODAL);
         
         webView = new WebView();
@@ -54,6 +51,6 @@ public class CalendarLinkDialog extends Stage {
         StackPane.setMargin(closeImageView, new Insets(20, 20, 20, 20));
         Scene scene = new Scene(sPane, 1000, 800);
         this.setScene(scene);        
-        
+            
     }        
 }

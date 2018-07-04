@@ -211,7 +211,9 @@ public class BorderVerticalLayout extends BorderPane implements EventHandler {
         //listView.getStyleClass().add("lista");
         DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         Date date = new Date();
-        String strTitle = "Данас је " + dateFormat.format(date);
+        ApplicationContext app = ApplicationContext.getInstance();
+        
+        String strTitle = app.getLabel("TodayIs") + " " + dateFormat.format(date);
         Label title = new Label(strTitle);
         title.getStyleClass().add("title");         
 

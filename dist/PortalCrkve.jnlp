@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="PortalCrkve.jar" size="5898263" download="eager" />
+    <jar href="PortalCrkve.jar" size="5898389" download="eager" />
     <jar href="lib\java-json.jar" size="84697" download="eager" />
     <jar href="lib\jxbrowser-6.20.jar" size="1119902" download="eager" />
     <jar href="lib\jxbrowser-linux64-6.20.jar" size="55414967" download="eager" />
