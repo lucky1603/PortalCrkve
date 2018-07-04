@@ -13,8 +13,6 @@ import java.io.IOException;
 import java.net.CookieManager;
 import java.net.MalformedURLException;
 import java.text.ParseException;
-import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
@@ -27,9 +25,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import rs.prosmart.JSHandlers.JSHandlers;
 import rs.prosmart.calendar.control.CalendarPane;
-import rs.prosmart.calendar.model.CalendarModel;
-import rs.prosmart.calendar.model.Day;
-import rs.prosmart.calendar.model.Month;
 
 
 /**
@@ -58,14 +53,14 @@ public class PortalCrkve extends Application {
             Logger.getLogger(PortalCrkve.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-//        browser = new Browser();
-//        browserView = new BrowserView(browser);
+        browser = new Browser();
+        browserView = new BrowserView(browser);
                         
         webView = new WebView();
         //webView.getEngine().load(getClass().getResource("Prezentacije/Glavna.html").toExternalForm());
         PortalModel model = new PortalModel();
-//        BorderVerticalLayout verticalLayout = new BorderVerticalLayout(browserView, model);
-        VerticalLayout verticalLayout = new VerticalLayout(webView, model);
+        BorderVerticalLayout verticalLayout = new BorderVerticalLayout(browserView, model);
+//        VerticalLayout verticalLayout = new VerticalLayout(webView, model);
         model.getIsTheaterModeProperty().addListener((o, stari, novi) -> {
             if(model.getIsTheaterMode())
             {
@@ -92,18 +87,18 @@ public class PortalCrkve extends Application {
             }
         });
         
-//        browserView.widthProperty().addListener((ovalue, staro, novo) ->{
-//            Document doc = webView.getEngine().getDocument();
-//                if(doc != null)
-//                {
-//                    Element el = (Element) doc.getElementById("glavna");
-//                    if(el != null)
-//                    {
-//                        el.setAttribute("width", novo.toString());                
-//                    }
-//                    
-//                }
-//        });
+        browserView.widthProperty().addListener((ovalue, staro, novo) ->{
+            Document doc = webView.getEngine().getDocument();
+                if(doc != null)
+                {
+                    Element el = (Element) doc.getElementById("glavna");
+                    if(el != null)
+                    {
+                        el.setAttribute("width", novo.toString());                
+                    }
+                    
+                }
+        });
         
         webView.heightProperty().addListener((o, stari, novi) -> {
             Document doc = webView.getEngine().getDocument();
@@ -124,8 +119,14 @@ public class PortalCrkve extends Application {
         primaryStage.setScene(scene);
         //primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.show();
-                        
+
         enableJSHandlers();                
+    }
+    
+    @Override
+    public void stop()
+    {
+        browser.dispose();
     }
 
     /**

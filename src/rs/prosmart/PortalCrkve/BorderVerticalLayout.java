@@ -26,6 +26,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import rs.prosmart.calendar.control.CalendarLinkDialog;
 import rs.prosmart.calendar.control.CalendarPane;
 import rs.prosmart.calendar.control.DayPane;
 
@@ -33,7 +34,7 @@ import rs.prosmart.calendar.control.DayPane;
  *
  * @author Sinisa
  */
-public class BorderVerticalLayout extends BorderPane {
+public class BorderVerticalLayout extends BorderPane implements EventHandler {
     private VBox frameBox;
     private VBox itemsBox;
     private VBox commandBox;
@@ -56,6 +57,7 @@ public class BorderVerticalLayout extends BorderPane {
         portalModel = model;
         connectedView = view;
         ApplicationContext app = ApplicationContext.getInstance();
+        app.setEventHandler(this);
         calendarPane = new CalendarPane(app.getCalendarModel());
         
         this.initMenu();
@@ -300,6 +302,20 @@ public class BorderVerticalLayout extends BorderPane {
         startImageView.setVisible(b);        
         exitImageView.setVisible(!b);
         homeImageView.setVisible(!b);
+    }
+
+    @Override
+    public void handle(Event event) {
+        DayPane dPane = (DayPane) event.getSource();
+        if(dPane != null)
+        {
+            URL url = dPane.getLinkUrl();
+            if(url != null)
+            {
+                CalendarLinkDialog dlg = new CalendarLinkDialog(dPane.getLinkUrl());
+                dlg.showAndWait();
+            }
+        }
     }
 
 }

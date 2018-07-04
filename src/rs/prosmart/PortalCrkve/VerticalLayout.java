@@ -321,11 +321,6 @@ public class VerticalLayout extends BorderPane implements EventHandler {
         homeImageView.setVisible(!b);
     }
     
-    public void showCalendarLink(URL url)
-    {
-        
-    }
-
     @Override
     public void handle(Event event) {
         DayPane dPane = (DayPane) event.getSource();
