@@ -70,10 +70,10 @@ public class CalendarPane extends VBox {
         
         
         this.setSpacing(30);
-        this.getChildren().addAll(commandPanel, monthPane);
-        this.getStyleClass().add("main");
+        this.getChildren().addAll(commandPanel, monthPane);        
         this.getStylesheets().add(getClass().getResource("calendar.css").toExternalForm());
-        this.setAlignment(Pos.CENTER);
+        this.setAlignment(Pos.TOP_CENTER);
+        this.getStyleClass().add("main");
 
         monthPane.registerForEvents();
         

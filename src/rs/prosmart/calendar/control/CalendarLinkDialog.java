@@ -46,10 +46,12 @@ public class CalendarLinkDialog extends Stage {
         });
 
         StackPane sPane = new StackPane();
+        sPane.getStyleClass().add("dialog");
         sPane.getChildren().addAll(webView, closeImageView);
         StackPane.setAlignment(closeImageView, Pos.BOTTOM_RIGHT);        
         StackPane.setMargin(closeImageView, new Insets(20, 20, 20, 20));
         Scene scene = new Scene(sPane, 1000, 800);
+        scene.setFill(Color.TRANSPARENT);
         this.setScene(scene);        
             
     }        

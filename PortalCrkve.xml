@@ -8,7 +8,7 @@ and open the template in the editor.
 
 <settings>
     <CalendarEvents>
-         <Event type="TASK">
+         <Event type="HOLIDAY">
             <date>01.07.2018</date>
             <name>Свети мученици Леонтије; Ипатије и Теодул</name>
             <image></image>
@@ -44,7 +44,7 @@ and open the template in the editor.
             <url>file:/d:/prosmart/crkva/html/svjovanpreteca.htm</url>
             <image></image>
         </Event>
-        <Event type="TASK">
+        <Event type="HOLIDAY">
             <date>08.07.2018</date>
             <name>Света преподобномученица Февронија</name>
             <image></image>
@@ -80,7 +80,7 @@ and open the template in the editor.
             <name>Свети мученици и бесребреници Козма и Дамјан</name>
             <image></image>
         </Event>
-        <Event type="TASK">
+        <Event type="HOLIDAY">
             <date>15.07.2018</date>
             <name>Полагање ризе Пресвете Богородице</name>
             <image></image>
@@ -115,7 +115,7 @@ and open the template in the editor.
             <name>Свети великомученик Прокопије</name>
             <image></image>
         </Event>
-        <Event type="TASK">
+        <Event type="HOLIDAY">
             <date>22.07.2018</date>
             <name>Свештеномученик Панкратије; свети Теодор; св. муч. Гламочки и Куленвакуфски</name>
             <image></image>
@@ -150,7 +150,7 @@ and open the template in the editor.
             <name>Свети мученици Кирик и Јулита; свети Владимир, велики кнез руски</name>
             <image></image>
         </Event>
-        <Event type="TASK">
+        <Event type="HOLIDAY">
             <date>29.07.2018</date>
             <name>Свети свештеномученик Атиноген; света мученица Јулија</name>
             <image></image>

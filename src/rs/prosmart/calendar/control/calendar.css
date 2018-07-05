@@ -9,9 +9,8 @@ and open the template in the editor.
 */
 
 .main {
-    -fx-width: 100%;
-    -fx-height: 100%;
     -fx-background-color: #175184;
+    -fx-padding: 5 5 5 5;
 }
 
 .month {
@@ -25,8 +24,7 @@ and open the template in the editor.
 }
 
 .today {
-    -fx-background-color: #000055;
-    
+    -fx-background-color: #000055;    
     -fx-padding: 5 5 5 5;
 }
 
@@ -88,10 +86,10 @@ and open the template in the editor.
 }
 
 
-.root {
+.dialog {
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 10, 0.5, 0.0, 0.0);
-    -fx-background-radius: 5;
-    -fx-padding: 10;
+    -fx-background-radius: 15;
+    -fx-padding: 50;
 }
 
 /* Named day */

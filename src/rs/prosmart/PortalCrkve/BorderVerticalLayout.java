@@ -85,20 +85,22 @@ public class BorderVerticalLayout extends BorderPane implements EventHandler {
 
         //startImageView.setScaleX(0.15);
         //startImageView.setScaleY(0.15);
-        startImageView.setOpacity(0.8);
+        //startImageView.setOpacity(0.8);
         
         // Mouse clicked.
         startImageView.setOnMouseClicked(e -> {
             URL url = this.portalModel.getEntryPoint();
             this.connectedView.getBrowser().loadURL(url.toExternalForm());
-            this.portalModel.setIsTheaterMode(true);
+            //this.portalModel.setIsTheaterMode(true);
+            //this.exitImageView.setVisible(true);            
         });
         
         // Touch
         startImageView.setOnTouchPressed(e -> {
             URL url = this.portalModel.getEntryPoint();
             this.connectedView.getBrowser().loadURL(url.toExternalForm());
-            this.portalModel.setIsTheaterMode(true);
+            //this.portalModel.setIsTheaterMode(true);
+            //this.exitImageView.setVisible(true);
         });
         
         Image exitImg = new Image(PortalCrkve.class.getResource("Slike/Log-Out-icon-128.png").toExternalForm());
@@ -300,7 +302,7 @@ public class BorderVerticalLayout extends BorderPane implements EventHandler {
         
         int idx = this.linkViews.indexOf(this.getSelectedLinkView());
         
-        startImageView.setVisible(b);        
+        //startImageView.setVisible(b);        
         exitImageView.setVisible(!b);
         homeImageView.setVisible(!b);
     }
