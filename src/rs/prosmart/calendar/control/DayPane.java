@@ -6,15 +6,11 @@
 package rs.prosmart.calendar.control;
 
 import java.net.URL;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 import rs.prosmart.PortalCrkve.ApplicationContext;
-import rs.prosmart.calendar.model.CalendarEvent;
 import rs.prosmart.calendar.model.CalendarEventType;
 import rs.prosmart.calendar.model.CalendarModel;
 import rs.prosmart.calendar.model.Day;
@@ -77,6 +73,14 @@ public class DayPane extends VBox {
                 {
                     lblEvent.setText(v.getName());
                     lblEvent.setVisible(true);
+                    this.linkUrl = v.getLinkUrl();
+                }
+                
+                if(v.getEventType() == CalendarEventType.SUNDAY)
+                {
+                    lblEvent.setText(v.getName());
+                    lblEvent.setVisible(true);
+                    this.getStyleClass().add("sunday");
                     this.linkUrl = v.getLinkUrl();
                 }
             }

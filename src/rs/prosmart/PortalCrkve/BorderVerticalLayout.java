@@ -11,6 +11,7 @@ import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -209,13 +210,11 @@ public class BorderVerticalLayout extends BorderPane implements EventHandler {
      * Initialization of menu items.
      */
     private void initMenu()
-    {
-        //listView.getStyleClass().add("lista");
-        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        Date date = new Date();
+    {   
         ApplicationContext app = ApplicationContext.getInstance();
-        
-        String strTitle = app.getLabel("TodayIs") + " " + dateFormat.format(date);
+        DateFormat dateFormat = new SimpleDateFormat("dd.MMM.yyyy", app.getLocale());
+        Date date = new Date();                
+        String strTitle = app.getLabel("TodayIs") + " " + dateFormat.format(date);        
         Label title = new Label(strTitle);
         title.getStyleClass().add("title");         
 

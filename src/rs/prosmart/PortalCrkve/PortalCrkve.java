@@ -45,7 +45,7 @@ public class PortalCrkve extends Application {
         // I approach.
         String currentDir = System.getProperty("user.dir");
         ApplicationContext app = ApplicationContext.getInstance();
-        app.setLocale(new Locale("ru", "RU"));
+        app.setLocale(new Locale("sr", "RS"));
         app.getGeneralSettings().put("AppPath", currentDir);
         app.getGeneralSettings().put("ConfigFileName", "PortalCrkve.xml");           
         
@@ -56,13 +56,16 @@ public class PortalCrkve extends Application {
         }
         
         browser = new Browser();
-        browserView = new BrowserView(browser);
-                        
+        browserView = new BrowserView(browser);                        
         webView = new WebView();
+        
         //webView.getEngine().load(getClass().getResource("Prezentacije/Glavna.html").toExternalForm());
+        
         PortalModel model = new PortalModel();
         BorderVerticalLayout verticalLayout = new BorderVerticalLayout(browserView, model);
+        
 //        VerticalLayout verticalLayout = new VerticalLayout(webView, model);
+        
         model.getIsTheaterModeProperty().addListener((o, stari, novi) -> {
             if(model.getIsTheaterMode())
             {

@@ -100,7 +100,7 @@ public class Year {
         months.add(new Month(7, app.getLabel("July"), 31, false));
         months.add(new Month(8, app.getLabel("August"), 31, false));
         months.add(new Month(9, app.getLabel("September"), 30, false));
-        months.add(new Month(10, app.getLabel("Oktober"), 31, false));
+        months.add(new Month(10, app.getLabel("October"), 31, false));
         months.add(new Month(11, app.getLabel("November"), 30, false));
         months.add(new Month(12, app.getLabel("December"), 31, false));
     }

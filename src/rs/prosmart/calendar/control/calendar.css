@@ -23,32 +23,45 @@ and open the template in the editor.
     -fx-padding: 5 5 5 5;
 }
 
-.today {
-    -fx-background-color: #000055;    
-    -fx-padding: 5 5 5 5;
-}
-
 .calDayIndex {
-    -fx-font: 50 Arial;
-}
-
-.today .calDayIndex {
-    -fx-text-fill: #cddce9;
+    -fx-font: 50 Arial;    
 }
 
 .calDayName {
-    -fx-text-fill: #175184;
     -fx-font: 20 Arial;
-}
-
-/* Today */
-.today .calDayName {
-    -fx-text-fill: #cddce9;
 }
 
 .calMonth {
     -fx-text-fill: #175184;
     -fx-font: 20 Arial;
+}
+
+.calEvent {
+    -fx-font: 12 Arial;
+    -fx-alignment: center;
+    /* -fx-text-fill: #cddce9; */
+}
+
+.day .calDayIndex, .day .calDayName, .day .calMonth, .day .calEvent {
+    -fx-fill: #175184;
+}
+
+.today {
+    -fx-background-color: #000055;    
+    -fx-padding: 5 5 5 5;
+}
+
+
+
+.today .calDayIndex {
+    -fx-text-fill: #cddce9;
+}
+
+
+
+/* Today */
+.today .calDayName {
+    -fx-text-fill: #cddce9;
 }
 
 .today .calMonth {
@@ -68,11 +81,16 @@ and open the template in the editor.
     -fx-text-fill: #cddce9;
 }
 
-.calEvent {
-    -fx-font: 12 Arial;
-    -fx-alignment: center;
-    /* -fx-text-fill: #cddce9; */
+.sunday {
+    -fx-background-color: #FFD700;    
 }
+
+.sunday .calMonth, .sunday .calDayIndex, .sunday .calDayName, .sunday .calEvent {
+    -fx-text-fill: #175184;
+}
+
+
+
 
 .calendar-control-panel {
     
