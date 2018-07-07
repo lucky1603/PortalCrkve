@@ -11,6 +11,9 @@ import java.util.function.Consumer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
+import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -42,10 +45,23 @@ public class MonthPane extends GridPane {
         this.getChildren().clear();
         List<Map<Integer, Day>> lines = model.getLinesForMonth(month);
         int rows = 0, columns = 7;
-        for(/* Map<Integer, Day> line : lines */ int j = 0; j < lines.size(); j++)
+        List<String> daysOfWeek = model.getDaysOfWeek();
+        for(int i = 1; i <= 7; i++)
+        {
+            Label lbl = new Label(daysOfWeek.get(i-1));
+            lbl.getStyleClass().add("calendar-header-text");
+            BorderPane bPane = new BorderPane();
+            bPane.setCenter(lbl);
+            bPane.getStyleClass().add("calendar-header");
+            //lbl.setContentDisplay(ContentDisplay.CENTER);
+            lbl.getStyleClass().add("calendar-header");
+            this.add(bPane, i - 1, 0);
+        }
+        
+        for(/* Map<Integer, Day> line : lines */ int j = 1; j <= lines.size(); j++)
         {
             rows++;
-            Map<Integer, Day> line = lines.get(j);
+            Map<Integer, Day> line = lines.get(j-1);
             for(int i = 1; i <= 7; i++)
             {
                 Day d = line.get(i);
@@ -53,18 +69,23 @@ public class MonthPane extends GridPane {
                 if(d == null)
                     continue;
                 
-                DayPane dPane = new DayPane(this.model, d);
-                this.add(dPane, i - 1, j);                
+                //DayPane dPane = new DayPane(this.model, d);
+                StyledDayPane sdPane = new StyledDayPane(this.model, d);
+                this.add(sdPane, i - 1, j);                
             }
         }
         
         this.getRowConstraints().clear();
         this.getColumnConstraints().clear();
         
+        RowConstraints rcHeader = new RowConstraints();
+        rcHeader.setPercentHeight(5);
+        this.getRowConstraints().add(rcHeader);
+        
         for(int i = 0; i < rows; i++)
         {
             RowConstraints rc = new RowConstraints();
-            rc.setPercentHeight(100.0 / rows);
+            rc.setPercentHeight(95.0 / rows);
             this.getRowConstraints().add(rc);
         }
         

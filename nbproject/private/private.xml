@@ -3,9 +3,26 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/Prosmart/Crkva/Aplikacija/PortalCrkve/src/rs/prosmart/calendar/control/calendar.css</file>
+            <file>file:/D:/Prosmart/Crkva/Aplikacija/PortalCrkve/src/rs/prosmart/calendar/control/DayPane.java</file>
+            <file>file:/D:/Prosmart/Crkva/Aplikacija/PortalCrkve/src/rs/prosmart/calendar/control/CalendarLinkDialog.java</file>
+            <file>file:/D:/Prosmart/Crkva/Aplikacija/PortalCrkve/PortalCrkve.xml</file>
+            <file>file:/D:/Prosmart/Crkva/Aplikacija/PortalCrkve/src/LabelsBundle_en_US.properties</file>
+            <file>file:/D:/Prosmart/Crkva/Aplikacija/PortalCrkve/src/rs/prosmart/calendar/control/CalendarPane.java</file>
+            <file>file:/D:/Prosmart/Crkva/Aplikacija/PortalCrkve/src/rs/prosmart/calendar/model/Month.java</file>
+            <file>file:/D:/Prosmart/Crkva/Aplikacija/PortalCrkve/src/rs/prosmart/calendar/model/Day.java</file>
+            <file>file:/D:/Prosmart/Crkva/Aplikacija/PortalCrkve/src/rs/prosmart/PortalCrkve/ApplicationContext.java</file>
+            <file>file:/D:/Prosmart/Crkva/Aplikacija/PortalCrkve/src/rs/prosmart/PortalCrkve/Link.java</file>
+            <file>file:/D:/Prosmart/Crkva/Aplikacija/PortalCrkve/src/rs/prosmart/PortalCrkve/VerticalLayout.java</file>
+            <file>file:/D:/Prosmart/Crkva/Aplikacija/PortalCrkve/src/LabelsBundle_ru_RU.properties</file>
+            <file>file:/D:/Prosmart/Crkva/Aplikacija/PortalCrkve/src/LabelsBundle_sr_RS.properties</file>
             <file>file:/D:/Prosmart/Crkva/Aplikacija/PortalCrkve/src/rs/prosmart/PortalCrkve/PortalCrkve.java</file>
             <file>file:/D:/Prosmart/Crkva/Aplikacija/PortalCrkve/src/rs/prosmart/PortalCrkve/BorderVerticalLayout.java</file>
-            <file>file:/D:/Prosmart/Crkva/Aplikacija/PortalCrkve/src/rs/prosmart/PortalCrkve/Link.java</file>
+            <file>file:/D:/Prosmart/Crkva/Aplikacija/PortalCrkve/src/rs/prosmart/calendar/model/Year.java</file>
+            <file>file:/D:/Prosmart/Crkva/Aplikacija/PortalCrkve/src/rs/prosmart/calendar/model/CalendarEventType.java</file>
+            <file>file:/D:/Prosmart/Crkva/Aplikacija/PortalCrkve/src/rs/prosmart/PortalCrkve/PortalModel.java</file>
+            <file>file:/D:/Prosmart/Crkva/Aplikacija/PortalCrkve/src/rs/prosmart/calendar/model/CalendarModel.java</file>
+            <file>file:/D:/Prosmart/Crkva/Aplikacija/PortalCrkve/src/rs/prosmart/calendar/control/MonthPane.java</file>
         </group>
     </open-files>
 </project-private>

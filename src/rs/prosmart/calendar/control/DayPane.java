@@ -46,9 +46,7 @@ public class DayPane extends VBox {
         lblEvent.getStyleClass().add("calEvent");
         lblEvent.setWrapText(true);
         lblEvent.setTextAlignment(TextAlignment.CENTER);
-        
-        
-        
+                        
         this.getChildren().addAll(lblMonth, lblNumber, lblEvent, lblDay);
         this.setAlignment(Pos.CENTER);
         this.setSpacing(5);

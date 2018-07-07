@@ -89,9 +89,6 @@ and open the template in the editor.
     -fx-text-fill: #175184;
 }
 
-
-
-
 .calendar-control-panel {
     
 }
@@ -110,6 +107,13 @@ and open the template in the editor.
     -fx-padding: 50;
 }
 
-/* Named day */
+.calendar-header {
+    -fx-background-color: #000055;
+}
+
+.calendar-header-text {
+    -fx-font: 20 Arial;
+    -fx-text-fill: white;
+}
 
 

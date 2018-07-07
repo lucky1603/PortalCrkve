@@ -45,7 +45,7 @@ public class PortalCrkve extends Application {
         // I approach.
         String currentDir = System.getProperty("user.dir");
         ApplicationContext app = ApplicationContext.getInstance();
-        app.setLocale(new Locale("sr", "RS"));
+        app.setLocale(new Locale("ru", "RU"));
         app.getGeneralSettings().put("AppPath", currentDir);
         app.getGeneralSettings().put("ConfigFileName", "PortalCrkve.xml");           
         

@@ -225,7 +225,19 @@ public class CalendarModel {
         return this.events;
     }
     
-    
+    public List<String> getDaysOfWeek()
+    {
+        ApplicationContext app = ApplicationContext.getInstance();
+        List<String> days = new ArrayList<>();
+        days.add(app.getLabel("Sunday"));
+        days.add(app.getLabel("Monday"));
+        days.add(app.getLabel("Tuesday"));
+        days.add(app.getLabel("Wednesday"));
+        days.add(app.getLabel("Thursday"));
+        days.add(app.getLabel("Friday"));
+        days.add(app.getLabel("Saturday"));
+        return days;
+    }
     
     private Map<Integer, Day> createLine()
     {

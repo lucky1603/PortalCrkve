@@ -30,6 +30,7 @@ import javafx.scene.layout.VBox;
 import rs.prosmart.calendar.control.CalendarLinkDialog;
 import rs.prosmart.calendar.control.CalendarPane;
 import rs.prosmart.calendar.control.DayPane;
+import rs.prosmart.calendar.control.StyledDayPane;
 
 /**
  *
@@ -242,7 +243,7 @@ public class BorderVerticalLayout extends BorderPane implements EventHandler {
         itemsBox.getChildren().add(title);
         ////////////////
         Link calendarLink = new Link();
-        calendarLink.setCaption("Kalendar");
+        calendarLink.setCaption(app.getLabel("Calendar"));
         calendarLink.setURL(null);
         LinkView calendarLinkView = new LinkView(calendarLink);
         calendarLinkView.getStyleClass().add("submenu");
@@ -308,13 +309,24 @@ public class BorderVerticalLayout extends BorderPane implements EventHandler {
 
     @Override
     public void handle(Event event) {
-        DayPane dPane = (DayPane) event.getSource();
-        if(dPane != null)
+//        DayPane dPane = (DayPane) event.getSource();
+//        if(dPane != null)
+//        {
+//            URL url = dPane.getLinkUrl();
+//            if(url != null)
+//            {
+//                CalendarLinkDialog dlg = new CalendarLinkDialog(dPane.getLinkUrl());
+//                dlg.showAndWait();
+//            }
+//        }
+        
+        StyledDayPane sdPane = (StyledDayPane) event.getSource();
+        if(sdPane != null)
         {
-            URL url = dPane.getLinkUrl();
+            URL url = sdPane.getLinkUrl();
             if(url != null)
             {
-                CalendarLinkDialog dlg = new CalendarLinkDialog(dPane.getLinkUrl());
+                CalendarLinkDialog dlg = new CalendarLinkDialog(sdPane.getLinkUrl());
                 dlg.showAndWait();
             }
         }
