@@ -31,6 +31,7 @@ import javafx.scene.web.WebView;
 import rs.prosmart.calendar.control.CalendarLinkDialog;
 import rs.prosmart.calendar.control.CalendarPane;
 import rs.prosmart.calendar.control.DayPane;
+import rs.prosmart.calendar.control.StyledDayPane;
 
 /**
  *
@@ -323,13 +324,14 @@ public class VerticalLayout extends BorderPane implements EventHandler {
     
     @Override
     public void handle(Event event) {
-        DayPane dPane = (DayPane) event.getSource();
-        if(dPane != null)
+//        DayPane dPane = (DayPane) event.getSource();
+        StyledDayPane sdPane = (StyledDayPane) event.getSource();
+        if(sdPane != null)
         {
-            URL url = dPane.getLinkUrl();
+            URL url = sdPane.getLinkUrl();
             if(url != null)
             {
-                CalendarLinkDialog dlg = new CalendarLinkDialog(dPane.getLinkUrl());
+                CalendarLinkDialog dlg = new CalendarLinkDialog(sdPane.getLinkUrl());
                 dlg.showAndWait();
             }
         }
